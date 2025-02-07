@@ -2,9 +2,9 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layout/BaseLayout.astro";
 import { getEntry } from "astro:content";
+import { getEntries } from "astro:content";
 
-const post = await getEntry("posts", "post-1");
-console.log("🚀 ~ post:", post);
+const post = await getEntry("posts", "post-3");
 
 if (!post) {
   return new Response(null, {
@@ -12,11 +12,19 @@ if (!post) {
   });
 }
 
+const author = await getEntry("team", post.data.author.id);
+
+const todos = author ? await getEntries(author?.data.todos) : [];
+
 const { Content, headings } = await render(post);
 ---
 
 <BaseLayout>
   <h1>{post.data.title}</h1>
+  {author && <p>{author.data.name}</p>}
+  <ul>
+    {todos.map((t) => <li>{t.data.title}</li>)}
+  </ul>
   <img src={post.data.cover.src} alt={post.data.coverAlt} />
   <ul>
     {
