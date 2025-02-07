@@ -13,10 +13,15 @@ export const collections = {
         id: todo.id.toString(),
       }));
     },
-    schema: z.object({
-      title: z.string(),
-      completed: z.boolean(),
-    }),
+    schema: z
+      .object({
+        title: z.string(),
+        completed: z.boolean(),
+      })
+      .transform((data) => ({
+        taskName: data.title,
+        isComplete: data.completed,
+      })),
   }),
   posts: defineCollection({
     loader: glob({

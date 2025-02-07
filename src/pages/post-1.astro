@@ -23,7 +23,7 @@ const { Content, headings } = await render(post);
   <h1>{post.data.title}</h1>
   {author && <p>{author.data.name}</p>}
   <ul>
-    {todos.map((t) => <li>{t.data.title}</li>)}
+    {todos.map((t) => <li>{t.data.taskName}</li>)}
   </ul>
   <img src={post.data.cover.src} alt={post.data.coverAlt} />
   <ul>
