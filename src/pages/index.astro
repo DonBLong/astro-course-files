@@ -2,11 +2,20 @@
 import Heading from "../components/Heading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-import { Content, frontmatter } from "../components/MarkdownComponent.md";
-console.log("🚀 ~ frontmatter:", frontmatter);
+const posts = Object.values(import.meta.glob("./blog/*.md", { eager: true }));
 ---
 
 <BaseLayout>
-  <Heading tag="h1" size="h3">{frontmatter.title}</Heading>
-  <Content />
+  <Heading tag="h1" size="h3">Markdown in Astro</Heading>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <p>{post.frontmatter.title}</p>
+          <p>{post.frontmatter.description}</p>
+          <a href={post.url}>Read Post</a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
