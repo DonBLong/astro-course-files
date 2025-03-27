@@ -1,8 +1,12 @@
 ---
 import Heading from "../components/Heading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { Content, frontmatter } from "../components/MarkdownComponent.md";
+console.log("🚀 ~ frontmatter:", frontmatter);
 ---
 
 <BaseLayout>
-  <Heading tag="h1" size="h3">Markdown in Astro</Heading>
+  <Heading tag="h1" size="h3">{frontmatter.title}</Heading>
+  <Content />
 </BaseLayout>
