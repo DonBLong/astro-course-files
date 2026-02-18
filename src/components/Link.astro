@@ -1,5 +1,6 @@
 ---
 const { href } = Astro.props;
+console.log("hi from server");
 ---
 
 <a href={href} class="text-5xl">
@@ -11,3 +12,7 @@ a {
   color: red;
 }
 </style>
+
+<script>
+console.log("hi from client");
+</script>

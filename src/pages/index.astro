@@ -1,7 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopyRightYear } from "../lib/utils";
 ---
 
 <BaseLayout title="Home">
   <h1>Home</h1>
+  <p id="copyright"></p>
 </BaseLayout>
+
+<script is:inline>
+import { getCopyRightYear } from "../lib/utils";
+const year = getCopyRightYear();
+const copyright = document.querySelector<HTMLParagraphElement>("#copyright");
+if (copyright) copyright.textContent = `\u00a9 ${year}`;
+</script>
