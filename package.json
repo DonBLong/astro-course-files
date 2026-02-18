@@ -1,15 +1,19 @@
 {
   "name": "astro-course-files",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "dprint": "dprint",
+    "fmt": "dprint fmt ."
   },
   "dependencies": {
-    "astro": "^3.5.5"
+    "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "dprint": "^0.51.1"
   }
 }
