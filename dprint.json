@@ -2,7 +2,9 @@
   "newLineKind": "crlf",
   "markup": {
     "closingBracketSameLine": true,
-    "doctypeKeywordCase": "lower"
+    "doctypeKeywordCase": "lower",
+    "styleIndent": true,
+    "scriptIndent": true
   },
   "excludes": [
     "**/node_modules",
