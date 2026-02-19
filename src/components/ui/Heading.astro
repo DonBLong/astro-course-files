@@ -1,0 +1,16 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLHeadingTag } from "@/utils/types";
+import type { HTMLAttributes } from "astro/types";
+
+type Props<Tag extends HTMLHeadingTag = "h1"> = HTMLAttributes<Tag> & {
+  tag?: Tag;
+};
+
+const { tag: Tag = "h1", class: className, "class:list": classList, ...props } =
+  Astro.props;
+---
+
+<Tag class={cn(className, classList)} {...props}>
+  <slot />
+</Tag>
