@@ -1,0 +1,19 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"p">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<p
+  data-slot="card-title"
+  class={cn(
+    "text-base leading-snug font-medium group-data-[size=sm]/card:text-sm",
+    className,
+    classList,
+  )}
+  {...props}>
+  <slot />
+</p>

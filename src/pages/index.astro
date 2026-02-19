@@ -1,9 +1,44 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
-  <body></body>
-</html>
+---
+import Author from "@/components/Author.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardDescription from "@/components/ui/card/CardDescription.astro";
+import CardHeader from "@/components/ui/card/CardHeader.astro";
+import CardTitle from "@/components/ui/card/CardTitle.astro";
+import data from "@/data/data.json";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+---
+
+<BaseLayout>
+  <main slot="main">
+    <ul class="py-4 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
+      {data.map(async (
+        { hero, category, title, description, author, time },
+      ) => (
+        <li class="grid grid-rows-subgrid row-span-3">
+          <Card class="relative pt-0 grid grid-rows-subgrid row-span-3">
+            <Image
+              slot="card-image"
+              src={`/${hero}`}
+              alt={title}
+              width={400}
+              height={400}
+              class="relative z-20 aspect-video w-full object-cover brightness-60 dark:brightness-40"
+            />
+            <CardHeader slot="card-header">
+              <Badge slot="card-action" class={category.toLocaleLowerCase()}>
+                {category.toLocaleUpperCase()}
+              </Badge>
+              <CardTitle slot="card-title">{title}</CardTitle>
+              <CardDescription slot="card-description">
+                {description}
+              </CardDescription>
+            </CardHeader>
+            <Author slot="card-footer" time={time} {...author} />
+          </Card>
+        </li>
+      ))}
+    </ul>
+  </main>
+</BaseLayout>

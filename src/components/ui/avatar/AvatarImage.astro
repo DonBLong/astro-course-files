@@ -1,0 +1,19 @@
+---
+import { cn } from "@/utils/cn";
+import type { RemoteImageProps } from "astro:assets";
+import { Image } from "astro:assets";
+
+type Props = RemoteImageProps;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<Image
+  data-slot="avatar-image"
+  class={cn(
+    "rounded-full aspect-square size-full object-cover",
+    className,
+    classList,
+  )}
+  {...props}
+/>

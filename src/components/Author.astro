@@ -1,0 +1,34 @@
+---
+import type data from "@/data/data.json";
+import Avatar from "./ui/avatar/Avatar.astro";
+import AvatarImage from "./ui/avatar/AvatarImage.astro";
+import Item from "./ui/item/Item.astro";
+import ItemContent from "./ui/item/ItemContent.astro";
+import ItemDescription from "./ui/item/ItemDescription.astro";
+import ItemMedia from "./ui/item/ItemMedia.astro";
+import ItemTitle from "./ui/item/ItemTitle.astro";
+
+type Props =
+  & (typeof data)[number]["author"]
+  & Pick<(typeof data)[number], "time">;
+
+const { avatar, name, time } = Astro.props;
+---
+
+<Item>
+  <ItemMedia slot="item-media">
+    <Avatar>
+      <AvatarImage
+        slot="avatar-image"
+        src={`/${avatar}`}
+        alt={name}
+        width={50}
+        height={50}
+      />
+    </Avatar>
+  </ItemMedia>
+  <ItemContent slot="item-content">
+    <ItemTitle slot="item-title">{name}</ItemTitle>
+    <ItemDescription slot="item-description">{time}</ItemDescription>
+  </ItemContent>
+</Item>
