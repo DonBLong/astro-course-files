@@ -2,6 +2,9 @@
 import { cn } from "@/utils/cn";
 import type { HTMLHeadingTag } from "@/utils/types";
 import type { HTMLAttributes } from "astro/types";
+import { cva } from "class-variance-authority";
+
+const headingVariants = cva();
 
 type Props<Tag extends HTMLHeadingTag = "h1"> = HTMLAttributes<Tag> & {
   tag?: Tag;
