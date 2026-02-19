@@ -1,24 +1,25 @@
 ---
 import Button from "@/components/ui/Button.astro";
-import Heading from "@/components/ui/Heading.astro";
+import Heading, {
+  type Props as HeadingProps,
+} from "@/components/ui/Heading.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import type { HTMLHeadingTag } from "@/utils/types";
 
-const headings: { tag: HTMLHeadingTag; size: string; text: string }[] = [
+const headings: (HeadingProps & { text: string })[] = [
   {
     tag: "h1",
-    size: "lg",
-    text: "Headin 1",
+    size: "5xl",
+    text: "Heading 1",
   },
   {
     tag: "h2",
-    size: "6xl",
-    text: "Headin 2",
+    size: "xl",
+    text: "Heading 2",
   },
   {
     tag: "h4",
-    size: "2xl",
-    text: "Headin 3",
+    size: "6xl",
+    text: "Heading 3",
   },
 ];
 ---
@@ -29,11 +30,11 @@ const headings: { tag: HTMLHeadingTag; size: string; text: string }[] = [
     slot="main"
     class="grid items-center justify-center">
     <div class="grid gap-16 place-items-center">
-      <ul>
+      <ul class="grid gap-2">
         {headings.map(({ tag, size, text }) => (
-          <Heading tag={tag} class={`text-${size} font-bold`}>
-            {text}
-          </Heading>
+          <li>
+            <Heading tag={tag} size={size}>{text.toUpperCase()}</Heading>
+          </li>
         ))}
       </ul>
       <Button variant="destructive">Click me</Button>

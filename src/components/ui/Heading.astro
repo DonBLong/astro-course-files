@@ -1,19 +1,47 @@
 ---
 import { cn } from "@/utils/cn";
-import type { HTMLHeadingTag } from "@/utils/types";
-import type { HTMLAttributes } from "astro/types";
-import { cva } from "class-variance-authority";
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
 
-const headingVariants = cva();
+const headingVariants = cva("font-bold", {
+  variants: {
+    size: {
+      xs: "text-xs",
+      sm: "text-sm",
+      lg: "text-lg",
+      xl: "text-xl",
+      "2xl": "text-2xl",
+      "3xl": "text-3xl",
+      "4xl": "text-4xl",
+      "5xl": "text-5xl",
+      "6xl": "text-6xl",
+      "7xl": "text-7xl",
+      "8xl": "text-8xl",
+      "9xl": "text-9xl",
+    },
+  },
+});
 
-type Props<Tag extends HTMLHeadingTag = "h1"> = HTMLAttributes<Tag> & {
-  tag?: Tag;
-};
+type HTMLHeadingTag = Extract<
+  HTMLTag,
+  "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
+>;
 
-const { tag: Tag = "h1", class: className, "class:list": classList, ...props } =
-  Astro.props;
+export interface Props
+  extends HTMLAttributes<HTMLHeadingTag>, VariantProps<typeof headingVariants>
+{
+  tag?: HTMLHeadingTag;
+}
+
+const {
+  tag: Tag = "h1",
+  size,
+  class: className,
+  "class:list": classList,
+  ...props
+} = Astro.props;
 ---
 
-<Tag class={cn(className, classList)} {...props}>
+<Tag class={cn(headingVariants({ size, className }), classList)} {...props}>
   <slot />
 </Tag>

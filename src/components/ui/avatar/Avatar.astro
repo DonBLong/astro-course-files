@@ -2,7 +2,9 @@
 import { cn } from "@/utils/cn";
 import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<"div"> & { size?: "default" | "sm" | "lg" };
+interface Props extends HTMLAttributes<"div"> {
+  size?: "default" | "sm" | "lg";
+}
 
 const {
   size = "default",
