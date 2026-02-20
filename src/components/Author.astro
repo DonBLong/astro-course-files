@@ -1,5 +1,5 @@
 ---
-import type data from "@/data/data.json";
+import type blogs from "@/data/blogs.json";
 import Avatar from "./ui/avatar/Avatar.astro";
 import AvatarImage from "./ui/avatar/AvatarImage.astro";
 import Item from "./ui/item/Item.astro";
@@ -9,17 +9,16 @@ import ItemMedia from "./ui/item/ItemMedia.astro";
 import ItemTitle from "./ui/item/ItemTitle.astro";
 
 type Props =
-  & (typeof data)[number]["author"]
-  & Pick<(typeof data)[number], "time">;
+  & (typeof blogs)[number]["author"]
+  & Pick<(typeof blogs)[number], "time">;
 
 const { avatar, name, time } = Astro.props;
 ---
 
 <Item>
-  <ItemMedia slot="item-media">
+  <ItemMedia>
     <Avatar>
       <AvatarImage
-        slot="avatar-image"
         src={`/${avatar}`}
         alt={name}
         width={50}
@@ -27,8 +26,8 @@ const { avatar, name, time } = Astro.props;
       />
     </Avatar>
   </ItemMedia>
-  <ItemContent slot="item-content">
-    <ItemTitle slot="item-title">{name}</ItemTitle>
-    <ItemDescription slot="item-description">{time}</ItemDescription>
+  <ItemContent>
+    <ItemTitle>{name}</ItemTitle>
+    <ItemDescription>{time}</ItemDescription>
   </ItemContent>
 </Item>

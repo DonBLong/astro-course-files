@@ -1,9 +1,17 @@
 ---
+import PriceCard from "@/components/PriceCard.astro";
+import data from "@/data/prices.json";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-  <header slot="header"></header>
-  <main slot="main"></main>
-  <footer slot="footer"></footer>
+  <section slot="section" aria-label="Pricing" class="py-4">
+    <ul class="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center">
+      {data.map(item => (
+        <li class="w-full max-w-120 grid grid-rows-subgrid row-span-7">
+          <PriceCard {...item} />
+        </li>
+      ))}
+    </ul>
+  </section>
 </BaseLayout>
