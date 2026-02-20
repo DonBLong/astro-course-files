@@ -1,0 +1,49 @@
+---
+import type blogs from "@/data/blogs.json";
+import { Image } from "astro:assets";
+import Author from "./Author.astro";
+import Badge from "./ui/Badge.astro";
+import Card from "./ui/card/Card.astro";
+import CardDescription from "./ui/card/CardDescription.astro";
+import CardHeader from "./ui/card/CardHeader.astro";
+import CardTitle from "./ui/card/CardTitle.astro";
+
+type Props = (typeof blogs)[number];
+
+const { author, category, description, hero, time, title } = Astro.props;
+---
+
+<Card class="relative grid grid-rows-subgrid row-span-3 pt-0">
+  <Image
+    src={`/${hero}`}
+    alt={title}
+    width={400}
+    height={400}
+    class="relative z-20 aspect-video w-full object-cover brightness-80"
+  />
+  <CardHeader>
+    <Badge class:list={[category.toLocaleLowerCase(), "mb-2"]}>
+      {category.toLocaleUpperCase()}
+    </Badge>
+    <CardTitle>{title}</CardTitle>
+    <CardDescription>{description}</CardDescription>
+  </CardHeader>
+  <Author time={time} {...author} />
+</Card>
+
+<style>
+  .technology {
+    --primary: oklch(0.6 0.12 221);
+    --primary-foreground: oklch(0.985 0 0);
+  }
+
+  .popular {
+    --primary: oklch(0.45 0.12 275);
+    --primary-foreground: oklch(0.985 0 0);
+  }
+
+  .design {
+    --primary: oklch(0.54 0.18 325);
+    --primary-foreground: oklch(0.985 0 0);
+  }
+</style>

@@ -2,12 +2,12 @@
 import { cn } from "@/utils/cn";
 import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<"p">;
+type Props = HTMLAttributes<"div">;
 
 const { class: className, "class:list": classList, ...props } = Astro.props;
 ---
 
-<p
+<div
   data-slot="card-title"
   class={cn(
     "text-base leading-snug font-medium group-data-[size=sm]/card:text-sm",
@@ -16,4 +16,4 @@ const { class: className, "class:list": classList, ...props } = Astro.props;
   )}
   {...props}>
   <slot />
-</p>
+</div>

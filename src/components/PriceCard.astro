@@ -1,0 +1,110 @@
+---
+import prices from "@/data/prices.json";
+import { Check, X } from "lucide-react";
+import Badge from "./ui/Badge.astro";
+import Button from "./ui/Button.astro";
+import Card from "./ui/card/Card.astro";
+import CardAction from "./ui/card/CardAction.astro";
+import CardContent from "./ui/card/CardContent.astro";
+import CardDescription from "./ui/card/CardDescription.astro";
+import CardFooter from "./ui/card/CardFooter.astro";
+import CardHeader from "./ui/card/CardHeader.astro";
+import CardTitle from "./ui/card/CardTitle.astro";
+import Heading from "./ui/Heading.astro";
+import Item from "./ui/item/Item.astro";
+import ItemMedia from "./ui/item/ItemMedia.astro";
+import ItemTitle from "./ui/item/ItemTitle.astro";
+
+type Props = (typeof prices)[number];
+
+const {
+  amount_per_month,
+  btn_text,
+  description,
+  features,
+  most_popular,
+  tier,
+  title,
+} = Astro.props;
+---
+
+<Card
+  class:list={[
+    "grid grid-rows-subgrid row-span-7 text-center rounded-sm *:rounded-none overflow-hidden pt-0 ring-0 shadow-lg font-[inter]",
+    { "shadow-2xl": most_popular },
+    tier.toLowerCase(),
+  ]}>
+  <CardHeader
+    class="justify-center py-2 bg-primary text-primary-foreground font-bold">
+    {tier.toLocaleUpperCase()}
+  </CardHeader>
+  <CardContent class="grid grid-rows-subgrid row-span-4">
+    <div class="mt-2 mb-4">
+      {most_popular && (
+        <Badge variant="secondary" class="rounded-xs p-3">MOST POPULAR</Badge>
+      )}
+    </div>
+    <CardTitle class="grid grid-rows-subgrid row-span-2">
+      <Heading tag="h3" size="5xl" class="relative font-semibold">
+        <sup class="text-sm absolute -translate-x-3">$</sup>
+        {amount_per_month}
+        {amount_per_month > 0 && <span class="text-sm font-normal"> /mo</span>}
+      </Heading>
+      <Heading tag="h4" size="lg" class="font-semibold">
+        {title.toLocaleUpperCase()}
+      </Heading>
+    </CardTitle>
+    <CardDescription
+      class="text-foreground font-semibold w-40 mx-auto">{description}</CardDescription>
+  </CardContent>
+  <CardAction class="my-6">
+    <Button
+      variant={most_popular ? "default" : "secondary"}
+      class="py-6 border-border border-2 bg-clip-border rounded-sm font-bold">{btn_text.toLocaleUpperCase()}</Button>
+  </CardAction>
+  <CardFooter class="bg-inherit border-none">
+    <ul>
+      {features.map(feature => (
+        <li>
+          <Item>
+            <ItemMedia>
+              {feature.checked ? <Check className="text-success" /> : (
+                 <X className="text-destructive" />
+               )}
+            </ItemMedia>
+            <ItemTitle>{feature.title}</ItemTitle>
+          </Item>
+        </li>
+      ))}
+    </ul>
+  </CardFooter>
+</Card>
+
+<style>
+  .free {
+    --primary: var(--card);
+    --primary-foreground: light-dark(
+      oklch(0.47499 0.15813 278.538),
+      oklch(0.72253 0.07957 284.229)
+    );
+    --secondary: var(--card);
+    --border: var(--foreground);
+  }
+  .pro {
+    --primary: oklch(0.47499 0.15813 278.538);
+    --primary-foreground: white;
+    --secondary: var(--foreground);
+    --secondary-foreground: var(--background);
+    --border: oklch(0.47499 0.15813 278.538);
+  }
+  .enterprise {
+    --primary: oklch(0.7513 0.14429 91.363);
+    --primary-foreground: oklch(0.145 0 0);
+    --secondary: var(--card);
+    --secondary-foreground: light-dark(
+      oklch(0.45935 0.08907 93.001),
+      oklch(0.7513 0.14429 91.363)
+    );
+    --border: oklch(0.7513 0.14429 91.363);
+  }
+</style>

@@ -3,7 +3,7 @@ import "@/styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,7 @@ import "@/styles/global.css";
   <body class="min-h-screen w-full max-w-9/10 mx-auto grid grid-rows-[auto_1fr_auto]">
     <slot name="header" />
     <slot name="main" />
+    <slot name="section" />
     <slot name="footer" />
   </body>
 </html>
