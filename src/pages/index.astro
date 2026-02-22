@@ -1,17 +1,16 @@
 ---
-import PriceCard from "@/components/PriceCard.astro";
-import data from "@/data/prices.json";
+import Button from "@/components/ui/Button.astro";
+import Heading from "@/components/ui/Heading.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-  <section slot="section" aria-label="Pricing" class="py-4">
-    <ul class="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center">
-      {data.map(item => (
-        <li class="w-full max-w-120 grid grid-rows-subgrid row-span-7">
-          <PriceCard {...item} />
-        </li>
-      ))}
-    </ul>
-  </section>
+  <main
+    slot="main"
+    class="min-h-screen grid gap-8 place-items-center place-content-center">
+    <Heading tag="h1" size="6xl">Pokémon</Heading>
+    <Button size="lg" class="text-xl">
+      <a href="/pokemon">Explore</a>
+    </Button>
+  </main>
 </BaseLayout>

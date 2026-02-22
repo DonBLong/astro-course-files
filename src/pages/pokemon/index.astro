@@ -1,0 +1,22 @@
+---
+import { getPokemons } from "@/api/pokemon";
+import Button from "@/components/ui/Button.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const pokemons = await getPokemons();
+---
+
+<BaseLayout>
+  <main slot="main">
+    <nav>
+      <ul>
+        {pokemons.map(({ name }) => (
+          <li>
+            <Button variant="link">
+              <a href={`/pokemon/${name}`}>{name}</a>
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </main>
+</BaseLayout>

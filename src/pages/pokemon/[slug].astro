@@ -1,0 +1,28 @@
+---
+import { getPokemons, type Pokemon } from "@/api/pokemon";
+import Button from "@/components/ui/Button.astro";
+import Heading from "@/components/ui/Heading.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const pokemons = await getPokemons();
+  return pokemons.map(({ name, url }) => ({
+    params: { slug: name },
+    props: { name, url },
+  }));
+}) satisfies GetStaticPaths;
+
+const { name, url } = Astro.props;
+---
+
+<BaseLayout>
+  <main slot="main">
+    <Heading tag="h1" size="6xl" class="mb-8">{name}</Heading>
+    <Button variant="link" size="lg">
+      <Heading tag="h2" size="xl">
+        <a href={url}>Learn more</a>
+      </Heading>
+    </Button>
+  </main>
+</BaseLayout>
