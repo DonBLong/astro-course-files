@@ -1,0 +1,17 @@
+---
+import BlogItem from "@/components/blogs/BlogItem.astro";
+import blogs from "@/data/blogs.json";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Blogs">
+  <main class="py-4">
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
+      {blogs.map(blog => (
+        <li class="grid grid-rows-subgrid row-span-3 gap-0">
+          <BlogItem {...blog} />
+        </li>
+      ))}
+    </ul>
+  </main>
+</BaseLayout>

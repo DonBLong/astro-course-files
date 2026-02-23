@@ -1,0 +1,57 @@
+---
+import Author from "@/components/posts/Author.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardAction from "@/components/ui/card/CardAction.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import CardDescription from "@/components/ui/card/CardDescription.astro";
+import CardHeader from "@/components/ui/card/CardHeader.astro";
+import CardTitle from "@/components/ui/card/CardTitle.astro";
+import Heading from "@/components/ui/Heading.astro";
+import ItemDescription from "@/components/ui/item/ItemDescription.astro";
+import { Image } from "astro:assets";
+import type { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
+
+type Props = Awaited<ReturnType<typeof getCollection<"posts">>>[number];
+
+const {
+  data: { author: { id: authorId }, cover, coverAlt, pubDate, tags, title },
+  rendered,
+} = Astro.props;
+
+const author = (await getEntry("team", authorId))?.data;
+---
+
+<Card class="shadow-2xl">
+  <CardHeader>
+    <CardTitle class="grid gap-4">
+      <ul class="flex gap-2">
+        {tags.map(tag => (
+          <li>
+            <Badge>{tag.toLocaleUpperCase()}</Badge>
+          </li>
+        ))}
+      </ul>
+      <Heading tag="h1" size="4xl">{title}</Heading>
+      <CardDescription>
+        <i>Published:</i>
+        <time datetime={pubDate.toLocaleString()}>{pubDate}</time>
+      </CardDescription>
+    </CardTitle>
+    <CardAction class="max-w-min">
+      <Author {...author} />
+    </CardAction>
+  </CardHeader>
+  <CardContent
+    class="text-lg [&_h2]:text-xl [&_h2]:font-semibold grid gap-4"
+    set:html={rendered?.html}>
+    <Card class="relative aspect-video">
+      <Image
+        src={cover}
+        alt={coverAlt}
+        class="relative z-20 aspect-video w-full object-cover"
+      />
+    </Card>
+  </CardContent>
+</Card>

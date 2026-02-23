@@ -1,0 +1,43 @@
+---
+import Avatar from "@/components/ui/avatar/Avatar.astro";
+import AvatarImage from "@/components/ui/avatar/AvatarImage.astro";
+import Item from "@/components/ui/item/Item.astro";
+import ItemContent from "@/components/ui/item/ItemContent.astro";
+import ItemDescription from "@/components/ui/item/ItemDescription.astro";
+import ItemMedia from "@/components/ui/item/ItemMedia.astro";
+import ItemTitle from "@/components/ui/item/ItemTitle.astro";
+import type { getCollection } from "astro:content";
+
+type Props = Partial<
+  Awaited<ReturnType<typeof getCollection<"team">>>[number]["data"] & {
+    pubDate: Date;
+  }
+>;
+
+const { avatar, name, email, role, department, pubDate } = Astro.props;
+---
+
+<Item class="w-fit">
+  <ItemMedia>
+    <Avatar>
+      {avatar && name && (
+        <AvatarImage
+          src={avatar}
+          alt={name}
+        />
+      )}
+    </Avatar>
+  </ItemMedia>
+  <ItemContent>
+    {name && <ItemTitle>{name}</ItemTitle>}
+    {email && <ItemDescription>{email}</ItemDescription>}
+    {role && <ItemDescription>{role}</ItemDescription>}
+    {department && <ItemDescription>{department}</ItemDescription>}
+    {pubDate && (
+      <ItemDescription>
+        <time
+          datetime={pubDate.toLocaleString()}>{pubDate.toLocaleString()}</time>
+      </ItemDescription>
+    )}
+  </ItemContent>
+</Item>

@@ -1,19 +1,19 @@
 ---
+import Badge from "@/components/ui/Badge.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardAction from "@/components/ui/card/CardAction.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import CardDescription from "@/components/ui/card/CardDescription.astro";
+import CardFooter from "@/components/ui/card/CardFooter.astro";
+import CardHeader from "@/components/ui/card/CardHeader.astro";
+import CardTitle from "@/components/ui/card/CardTitle.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Item from "@/components/ui/item/Item.astro";
+import ItemMedia from "@/components/ui/item/ItemMedia.astro";
+import ItemTitle from "@/components/ui/item/ItemTitle.astro";
 import prices from "@/data/prices.json";
 import { Check, X } from "lucide-react";
-import Badge from "./ui/Badge.astro";
-import Button from "./ui/Button.astro";
-import Card from "./ui/card/Card.astro";
-import CardAction from "./ui/card/CardAction.astro";
-import CardContent from "./ui/card/CardContent.astro";
-import CardDescription from "./ui/card/CardDescription.astro";
-import CardFooter from "./ui/card/CardFooter.astro";
-import CardHeader from "./ui/card/CardHeader.astro";
-import CardTitle from "./ui/card/CardTitle.astro";
-import Heading from "./ui/Heading.astro";
-import Item from "./ui/item/Item.astro";
-import ItemMedia from "./ui/item/ItemMedia.astro";
-import ItemTitle from "./ui/item/ItemTitle.astro";
 
 type Props = (typeof prices)[number];
 
@@ -57,7 +57,7 @@ const {
     <CardDescription
       class="text-foreground font-semibold w-40 mx-auto">{description}</CardDescription>
   </CardContent>
-  <CardAction class="my-6">
+  <CardAction class="grid px-4 my-6">
     <Button
       variant={most_popular ? "default" : "secondary"}
       class="py-6 border-border border-2 bg-clip-border rounded-sm font-bold">{btn_text.toLocaleUpperCase()}</Button>

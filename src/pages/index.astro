@@ -1,16 +1,8 @@
 ---
-import Button from "@/components/ui/Button.astro";
 import Heading from "@/components/ui/Heading.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
-  <main
-    slot="main"
-    class="min-h-screen grid gap-8 place-items-center place-content-center">
-    <Heading tag="h1" size="6xl">Pokémon</Heading>
-    <Button size="lg" class="text-xl">
-      <a href="/pokemon">Explore</a>
-    </Button>
-  </main>
+<BaseLayout title="Home">
+  <Heading tag="h1" size="6xl">Home</Heading>
 </BaseLayout>

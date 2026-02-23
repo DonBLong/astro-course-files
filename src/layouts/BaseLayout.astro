@@ -1,6 +1,12 @@
 ---
 import Button from "@/components/ui/Button.astro";
 import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -8,27 +14,53 @@ import "@/styles/global.css";
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astro</title>
+    <title>{title}</title>
   </head>
-  <body class="min-h-screen w-full max-w-9/10 mx-auto grid grid-rows-[auto_1fr_auto]">
+  <body class="min-h-screen max-w-[min(1000px,90%)] mx-auto grid grid-rows-[auto_1fr_auto] *:py-4">
     <header>
       <nav>
-        <ul class="flex gap-2 p-4">
+        <ul class="flex flex-wrap gap-2">
           <li>
-            <Button variant="ghost" size="lg" class="text-xl">
-              <a href="/">Home</a>
-            </Button>
+            <a href="/">
+              <Button variant="ghost" class="text-xl">
+                Home
+              </Button>
+            </a>
           </li>
           <li>
-            <Button variant="ghost" size="lg" class="text-xl">
-              <a href="/pokemon">Pokémon</a>
-            </Button>
+            <a href="/blogs">
+              <Button variant="ghost" class="text-xl">
+                Blogs
+              </Button>
+            </a>
+          </li>
+          <li>
+            <a href="/prices">
+              <Button variant="ghost" class="text-xl">
+                Prices
+              </Button>
+            </a>
+          </li>
+          <li>
+            <a href="/pokemon">
+              <Button variant="ghost" size="lg" class="text-xl">
+                Pokémon
+              </Button>
+            </a>
+          </li>
+          <li>
+            <a href="/posts">
+              <Button variant="ghost" size="lg" class="text-xl">
+                Posts
+              </Button>
+            </a>
           </li>
         </ul>
       </nav>
     </header>
-    <slot name="main" />
-    <slot name="section" />
-    <slot name="footer" />
+    <main>
+      <slot />
+    </main>
+    <footer></footer>
   </body>
 </html>

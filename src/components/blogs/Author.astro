@@ -1,0 +1,35 @@
+---
+import Avatar from "@/components/ui/avatar/Avatar.astro";
+import AvatarImage from "@/components/ui/avatar/AvatarImage.astro";
+import Item from "@/components/ui/item/Item.astro";
+import ItemContent from "@/components/ui/item/ItemContent.astro";
+import ItemDescription from "@/components/ui/item/ItemDescription.astro";
+import ItemMedia from "@/components/ui/item/ItemMedia.astro";
+import ItemTitle from "@/components/ui/item/ItemTitle.astro";
+import type blogs from "@/data/blogs.json";
+
+type Props =
+  & (typeof blogs)[number]["author"]
+  & Pick<(typeof blogs)[number], "time">;
+
+const { avatar, name, time } = Astro.props;
+---
+
+<Item class="w-fit">
+  <ItemMedia>
+    <Avatar>
+      <AvatarImage
+        src={`/${avatar}`}
+        alt={name}
+        width={50}
+        height={50}
+      />
+    </Avatar>
+  </ItemMedia>
+  <ItemContent>
+    <ItemTitle>{name}</ItemTitle>
+    <ItemDescription>
+      <time datetime={time}>{time}</time>
+    </ItemDescription>
+  </ItemContent>
+</Item>

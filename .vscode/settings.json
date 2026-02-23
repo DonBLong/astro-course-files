@@ -1,11 +1,13 @@
 {
-  "editor.formatOnSave": true,
   "editor.defaultFormatter": "dprint.dprint",
-  "json.schemaDownload.trustedDomains": {
-    "https://plugins.dprint.dev": true
-  },
+  "editor.formatOnSave": true,
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "tailwindCSS.classFunctions": ["cva"]
+  "json.schemaDownload.trustedDomains": {
+    "https://plugins.dprint.dev": true
+  },
+  "tailwindCSS.classFunctions": ["cva", "cn"],
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.useAliasesForRenames": true
 }

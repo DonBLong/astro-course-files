@@ -6,17 +6,15 @@ const pokemons = await getPokemons();
 ---
 
 <BaseLayout>
-  <main slot="main">
-    <nav>
-      <ul>
-        {pokemons.map(({ name }) => (
-          <li>
-            <Button variant="link">
-              <a href={`/pokemon/${name}`}>{name}</a>
-            </Button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </main>
+  <nav>
+    <ul>
+      {pokemons.map(({ name }) => (
+        <li>
+          <Button variant="link">
+            <a href={`/pokemon/${name}`}>{name}</a>
+          </Button>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </BaseLayout>

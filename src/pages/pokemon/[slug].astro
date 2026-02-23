@@ -17,12 +17,10 @@ const { name, url } = Astro.props;
 ---
 
 <BaseLayout>
-  <main slot="main">
-    <Heading tag="h1" size="6xl" class="mb-8">{name}</Heading>
-    <Button variant="link" size="lg">
-      <Heading tag="h2" size="xl">
-        <a href={url}>Learn more</a>
-      </Heading>
-    </Button>
-  </main>
+  <Heading tag="h1" size="6xl" class="mb-8">{name}</Heading>
+  <Button variant="link" size="lg">
+    <Heading tag="h2" size="xl">
+      <a href={url}>Learn more</a>
+    </Heading>
+  </Button>
 </BaseLayout>

@@ -1,0 +1,15 @@
+---
+import PriceItem from "@/components/prices/PriceItem.astro";
+import prices from "@/data/prices.json";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Prices">
+  <ul class="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-items-center">
+    {prices.map(price => (
+      <li class="w-full max-w-120 grid grid-rows-subgrid row-span-7">
+        <PriceItem {...price} />
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

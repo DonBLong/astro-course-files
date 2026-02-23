@@ -1,0 +1,33 @@
+---
+import Post from "@/components/posts/Post.astro";
+import PostItem from "@/components/posts/PostItem.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection, getEntry } from "astro:content";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const post = slug != null ? await getEntry("posts", slug) : undefined;
+
+const posts = slug == null
+  ? (await getCollection("posts")).toSorted((a, b) =>
+    a.data.slug.localeCompare(b.data.slug)
+  )
+  : undefined;
+
+if (!post && !posts?.length) return Astro.redirect("/404");
+---
+
+<BaseLayout title={post?.data.title ?? "Posts"}>
+  {post && <Post {...post} />}
+  {posts && (
+    <ul class="grid gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+      {posts.map(post => (
+        <li>
+          <PostItem {...post} />
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

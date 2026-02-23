@@ -1,0 +1,42 @@
+[
+  {
+    "id": "Sarah Johnson",
+    "name": "Sarah Johnson",
+    "role": "Project Manager",
+    "email": "sarah.johnson@example.com",
+    "department": "Engineering",
+    "avatar": "./images/sarah-johnson.jpg"
+  },
+  {
+    "id": "Michael Chen",
+    "name": "Michael Chen",
+    "role": "Senior Developer",
+    "email": "michael.chen@example.com",
+    "department": "Software Development",
+    "avatar": "./images/michael-chen.jpg"
+  },
+  {
+    "id": "Emma Wilson",
+    "name": "Emma Wilson",
+    "role": "UX Designer",
+    "email": "emma.wilson@example.com",
+    "department": "Product Design",
+    "avatar": "./images/emma-wilson.jpg"
+  },
+  {
+    "id": "David Rodriguez",
+    "name": "David Rodriguez",
+    "role": "Software Architect",
+    "email": "david.rodriguez@example.com",
+    "department": "Software Development",
+    "avatar": "./images/david-rodriguez.jpg"
+  },
+  {
+    "id": "Lisa Zhang",
+    "name": "Lisa Zhang",
+    "role": "Systems Engineer",
+    "email": "lisa.zhang@example.com",
+    "department": "Engineering",
+    "avatar": "./images/lisa-zhang.jpg"
+  }
+]

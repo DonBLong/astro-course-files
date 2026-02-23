@@ -1,19 +1,19 @@
 ---
+import Author from "@/components/blogs/Author.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardDescription from "@/components/ui/card/CardDescription.astro";
+import CardHeader from "@/components/ui/card/CardHeader.astro";
+import CardTitle from "@/components/ui/card/CardTitle.astro";
 import type blogs from "@/data/blogs.json";
 import { Image } from "astro:assets";
-import Author from "./Author.astro";
-import Badge from "./ui/Badge.astro";
-import Card from "./ui/card/Card.astro";
-import CardDescription from "./ui/card/CardDescription.astro";
-import CardHeader from "./ui/card/CardHeader.astro";
-import CardTitle from "./ui/card/CardTitle.astro";
 
 type Props = (typeof blogs)[number];
 
 const { author, category, description, hero, time, title } = Astro.props;
 ---
 
-<Card class="relative grid grid-rows-subgrid row-span-3 pt-0">
+<Card class="relative pt-0 grid grid-rows-subgrid row-span-3">
   <Image
     src={`/${hero}`}
     alt={title}
@@ -21,7 +21,8 @@ const { author, category, description, hero, time, title } = Astro.props;
     height={400}
     class="relative z-20 aspect-video w-full object-cover brightness-80"
   />
-  <CardHeader>
+  <CardHeader
+    class="grid has-data-[slot=card-description]:grid-rows-[auto_1fr_1fr]">
     <Badge class:list={[category.toLocaleLowerCase(), "mb-2"]}>
       {category.toLocaleUpperCase()}
     </Badge>
