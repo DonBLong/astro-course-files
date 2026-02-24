@@ -1,0 +1,91 @@
+---
+import Pagination from "@/components/ui/pagination/Pagination.astro";
+import PaginationContent from "@/components/ui/pagination/PaginationContent.astro";
+import PaginationEllipsis from "@/components/ui/pagination/PaginationEllipsis.astro";
+import PaginationItem from "@/components/ui/pagination/PaginationItem.astro";
+import PaginationLink from "@/components/ui/pagination/PaginationLink.astro";
+import PaginationNext from "@/components/ui/pagination/PaginationNext.astro";
+import PaginationPrevious from "@/components/ui/pagination/PaginationPrevious.astro";
+import { cn } from "@/utils/cn";
+import type { Page } from "astro";
+import type { ComponentProps } from "astro/types";
+
+interface Props extends ComponentProps<typeof Pagination> {
+  page: Page;
+}
+
+const { page, ...props } = Astro.props;
+
+const firstPage = 1;
+const isFirst = page.currentPage === firstPage;
+const isFirstPrev = page.currentPage === firstPage + 1;
+const isFarFromFirst = (page.currentPage - firstPage) > 2;
+const hasPrevious = page.url.prev != null;
+const hasNext = page.url.next != null;
+const lastPage = Math.ceil(page.total / page.size);
+const isLast = page.currentPage === lastPage;
+const isLastNext = page.currentPage === lastPage - 1;
+const isFarFromLast = (lastPage - page.currentPage) > 2;
+---
+
+<Pagination {...props}>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href={page.url.prev} />
+    </PaginationItem>
+
+    {!isFirst && !isFirstPrev && (
+      <PaginationItem>
+        <PaginationLink href={page.url.first}>
+          {firstPage}
+        </PaginationLink>
+      </PaginationItem>
+    )}
+
+    {isFarFromFirst && (
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+    )}
+
+    <PaginationItem>
+      {hasPrevious && (
+        <PaginationLink href={page.url.prev}>
+          {page.currentPage - 1}
+        </PaginationLink>
+      )}
+    </PaginationItem>
+
+    <PaginationItem>
+      <PaginationLink href={page.url.current} isActive>
+        {page.currentPage}
+      </PaginationLink>
+    </PaginationItem>
+
+    <PaginationItem>
+      {hasNext && (
+        <PaginationLink href={page.url.next}>
+          {page.currentPage + 1}
+        </PaginationLink>
+      )}
+    </PaginationItem>
+
+    {isFarFromLast && (
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+    )}
+
+    {!isLast && !isLastNext && (
+      <PaginationItem>
+        <PaginationLink href={page.url.last}>
+          {lastPage}
+        </PaginationLink>
+      </PaginationItem>
+    )}
+
+    <PaginationItem>
+      <PaginationNext href={page.url.next} />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>

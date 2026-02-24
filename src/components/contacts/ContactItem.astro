@@ -1,0 +1,36 @@
+---
+import type { Contact } from "@/api/contacts";
+import Item from "@/components/ui/item/Item.astro";
+import ItemContent from "@/components/ui/item/ItemContent.astro";
+import ItemDescription from "@/components/ui/item/ItemDescription.astro";
+import ItemTitle from "@/components/ui/item/ItemTitle.astro";
+
+type Props = Contact;
+
+const {
+  address,
+  company,
+  email,
+  firstname,
+  lastname,
+  phone,
+  website,
+} = Astro.props;
+---
+
+<Item variant="outline">
+  <ItemContent>
+    <ItemTitle>{firstname} {lastname}</ItemTitle>
+    <ItemDescription>{email}</ItemDescription>
+    <ItemDescription>{phone}</ItemDescription>
+    <ItemDescription>{website}</ItemDescription>
+    <ItemDescription>{company.name}</ItemDescription>
+    <ItemDescription>{company.bs}</ItemDescription>
+    <address>
+      <ItemDescription>{address.suite}</ItemDescription>
+      <ItemDescription>{address.street}</ItemDescription>
+      <ItemDescription>{address.city}</ItemDescription>
+      <ItemDescription>{address.zipcode}</ItemDescription>
+    </address>
+  </ItemContent>
+</Item>

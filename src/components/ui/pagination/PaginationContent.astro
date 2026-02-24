@@ -1,0 +1,15 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"ul">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<ul
+  data-slot="pagination-content"
+  class={cn("gap-0.5 flex items-center", className)}
+  {...props}>
+  <slot />
+</ul>

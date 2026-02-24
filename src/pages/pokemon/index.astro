@@ -5,7 +5,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 const pokemons = await getPokemons();
 ---
 
-<BaseLayout>
+<BaseLayout title="Pokémon">
   <nav>
     <ul>
       {pokemons.map(({ name }) => (

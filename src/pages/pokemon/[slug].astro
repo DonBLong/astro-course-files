@@ -16,7 +16,7 @@ export const getStaticPaths = (async () => {
 const { name, url } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout title={name}>
   <Heading tag="h1" size="6xl" class="mb-8">{name}</Heading>
   <Button variant="link" size="lg">
     <Heading tag="h2" size="xl">

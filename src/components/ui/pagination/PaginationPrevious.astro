@@ -1,0 +1,21 @@
+---
+import PaginationLink from "@/components/ui/pagination/PaginationLink.astro";
+import { cn } from "@/utils/cn";
+import type { ComponentProps } from "astro/types";
+import { ChevronLeftIcon } from "lucide-react";
+
+type Props = ComponentProps<typeof PaginationLink>;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<PaginationLink
+  aria-label="Go to previous page"
+  size="default"
+  class={cn("pl-1.5!", className, classList)}
+  {...props}>
+  <ChevronLeftIcon data-icon="inline-start" className="cn-rtl-flip" />
+  <span class="hidden sm:block">
+    <slot />
+  </span>
+</PaginationLink>

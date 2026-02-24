@@ -1,0 +1,48 @@
+---
+import { getContacts } from "@/api/contacts";
+import ContactItem from "@/components/contacts/ContactItem.astro";
+import Heading from "@/components/ui/Heading.astro";
+import AstroPagination from "@/components/ui/pagination/AstroPagination.astro";
+import Pagination from "@/components/ui/pagination/Pagination.astro";
+import PaginationContent from "@/components/ui/pagination/PaginationContent.astro";
+import PaginationEllipsis from "@/components/ui/pagination/PaginationEllipsis.astro";
+import PaginationItem from "@/components/ui/pagination/PaginationItem.astro";
+import PaginationLink from "@/components/ui/pagination/PaginationLink.astro";
+import PaginationNext from "@/components/ui/pagination/PaginationNext.astro";
+import PaginationPrevious from "@/components/ui/pagination/PaginationPrevious.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const contacts = await getContacts();
+  return paginate(contacts, { pageSize: 4 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const firstPage = 1;
+const isFirst = page.currentPage === firstPage;
+const isFirstPrev = page.currentPage === firstPage + 1;
+const isFarFromFirst = (page.currentPage - firstPage) > 2;
+const hasPrevious = page.url.prev != null;
+const hasNext = page.url.next != null;
+const lastPage = Math.ceil(page.total / page.size);
+const isLast = page.currentPage === lastPage;
+const isLastNext = page.currentPage === lastPage - 1;
+const isFarFromLast = (lastPage - page.currentPage) > 2;
+---
+<BaseLayout title="Contacts">
+  <Heading tag="h1" size="4xl" class="mb-4">
+    Contacts (Page {page.currentPage})
+  </Heading>
+
+  <AstroPagination page={page} class="mb-4" />
+
+  <ul class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
+    {page.data.map(contact => (
+      <li>
+        <ContactItem {...contact} />
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

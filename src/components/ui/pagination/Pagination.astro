@@ -1,0 +1,21 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"nav">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<nav
+  role="navigation"
+  aria-label="pagination"
+  data-slot="pagination"
+  class={cn(
+    "mx-auto flex w-full justify-center",
+    className,
+    classList,
+  )}
+  {...props}>
+  <slot />
+</nav>

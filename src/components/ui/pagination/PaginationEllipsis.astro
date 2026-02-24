@@ -1,0 +1,21 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+import { MoreHorizontalIcon } from "lucide-react";
+
+type Props = HTMLAttributes<"span">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<span
+  aria-hidden
+  data-slot="pagination-ellipsis"
+  class={cn(
+    "size-8 [&_svg:not([class*='size-'])]:size-4 flex items-center justify-center",
+    className,
+  )}
+  {...props}>
+  <MoreHorizontalIcon />
+  <span class="sr-only">More pages</span>
+</span>
