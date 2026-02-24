@@ -1,6 +1,6 @@
 ---
 import { getPokemons, type Pokemon } from "@/api/pokemon";
-import Button from "@/components/ui/Button.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
 import Heading from "@/components/ui/Heading.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type { GetStaticPaths } from "astro";
@@ -18,9 +18,9 @@ const { name, url } = Astro.props;
 
 <BaseLayout title={name}>
   <Heading tag="h1" size="6xl" class="mb-8">{name}</Heading>
-  <Button variant="link" size="lg">
+  <ButtonLink href={url} variant="link" size="lg">
     <Heading tag="h2" size="xl">
-      <a href={url}>Learn more</a>
+      Learn more
     </Heading>
-  </Button>
+  </ButtonLink>
 </BaseLayout>

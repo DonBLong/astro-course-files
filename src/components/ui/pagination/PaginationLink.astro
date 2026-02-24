@@ -1,26 +1,16 @@
 ---
-import Button from "@/components/ui/Button.astro";
-import { cn } from "@/utils/cn";
-import type { ComponentProps, HTMLAttributes } from "astro/types";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import type { ComponentProps } from "astro/types";
 
-interface Props
-  extends Pick<ComponentProps<typeof Button>, "size">, HTMLAttributes<"a">
-{
+interface Props extends ComponentProps<typeof ButtonLink> {
   isActive?: boolean;
 }
 
-const { isActive, size, class: className, "class:list": classList, ...props } =
-  Astro.props;
+const { isActive, ...props } = Astro.props;
 ---
-<a
+<ButtonLink
   aria-current={isActive ? "page" : undefined}
   data-slot="pagination-link"
   data-active={isActive}
-  {...props}>
-  <Button
-    variant={isActive ? "outline" : "ghost"}
-    size={size}
-    class={cn(className)}>
-    <slot />
-  </Button>
-</a>
+  variant={isActive ? "outline" : "ghost"}
+  {...props}><slot /></ButtonLink>

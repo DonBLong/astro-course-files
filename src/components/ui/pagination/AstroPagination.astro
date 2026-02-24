@@ -36,9 +36,7 @@ const isFarFromLast = (lastPage - page.currentPage) > 2;
 
     {!isFirst && !isFirstPrev && (
       <PaginationItem>
-        <PaginationLink href={page.url.first}>
-          {firstPage}
-        </PaginationLink>
+        <PaginationLink href={page.url.first}>{firstPage}</PaginationLink>
       </PaginationItem>
     )}
 
@@ -50,23 +48,21 @@ const isFarFromLast = (lastPage - page.currentPage) > 2;
 
     <PaginationItem>
       {hasPrevious && (
-        <PaginationLink href={page.url.prev}>
-          {page.currentPage - 1}
-        </PaginationLink>
+        <PaginationLink
+          href={page.url.prev}>{page.currentPage - 1}</PaginationLink>
       )}
     </PaginationItem>
 
     <PaginationItem>
-      <PaginationLink href={page.url.current} isActive>
-        {page.currentPage}
-      </PaginationLink>
+      <PaginationLink
+        href={page.url.current}
+        isActive>{page.currentPage}</PaginationLink>
     </PaginationItem>
 
     <PaginationItem>
       {hasNext && (
-        <PaginationLink href={page.url.next}>
-          {page.currentPage + 1}
-        </PaginationLink>
+        <PaginationLink
+          href={page.url.next}>{page.currentPage + 1}</PaginationLink>
       )}
     </PaginationItem>
 
@@ -78,9 +74,7 @@ const isFarFromLast = (lastPage - page.currentPage) > 2;
 
     {!isLast && !isLastNext && (
       <PaginationItem>
-        <PaginationLink href={page.url.last}>
-          {lastPage}
-        </PaginationLink>
+        <PaginationLink href={page.url.last}>{lastPage}</PaginationLink>
       </PaginationItem>
     )}
 

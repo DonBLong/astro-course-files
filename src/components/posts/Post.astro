@@ -11,6 +11,7 @@ import Heading from "@/components/ui/Heading.astro";
 import ItemDescription from "@/components/ui/item/ItemDescription.astro";
 import { Image } from "astro:assets";
 import type { getCollection } from "astro:content";
+import { render } from "astro:content";
 import { getEntry } from "astro:content";
 
 type Props = Awaited<ReturnType<typeof getCollection<"posts">>>[number];
@@ -21,6 +22,8 @@ const {
 } = Astro.props;
 
 const author = (await getEntry("team", authorId))?.data;
+
+const { Content } = await render(Astro.props);
 ---
 
 <Card class="shadow-2xl">
@@ -43,9 +46,7 @@ const author = (await getEntry("team", authorId))?.data;
       <Author {...author} />
     </CardAction>
   </CardHeader>
-  <CardContent
-    class="text-lg [&_h2]:text-xl [&_h2]:font-semibold grid gap-4"
-    set:html={rendered?.html}>
+  <CardContent class="text-lg [&_h2]:text-xl [&_h2]:font-semibold grid gap-4">
     <Card class="relative aspect-video">
       <Image
         src={cover}
@@ -53,5 +54,6 @@ const author = (await getEntry("team", authorId))?.data;
         class="relative z-20 aspect-video w-full object-cover"
       />
     </Card>
+    <Content />
   </CardContent>
 </Card>

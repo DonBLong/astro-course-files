@@ -1,5 +1,5 @@
 ---
-import Button from "@/components/ui/Button.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
 import "@/styles/global.css";
 
 interface Props {
@@ -12,8 +12,8 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>
   <body class="min-h-screen max-w-[min(1000px,90%)] mx-auto grid grid-rows-[auto_1fr_auto] *:py-4">
@@ -21,53 +21,50 @@ const { title } = Astro.props;
       <nav>
         <ul class="flex flex-wrap gap-2">
           <li>
-            <a href="/">
-              <Button variant="ghost" class="text-xl">
-                Home
-              </Button>
-            </a>
+            <ButtonLink
+              href="/"
+              variant="ghost"
+              class="text-xl">Home</ButtonLink>
           </li>
           <li>
-            <a href="/blogs">
-              <Button variant="ghost" class="text-xl">
-                Blogs
-              </Button>
-            </a>
+            <ButtonLink
+              href="/blogs"
+              variant="ghost"
+              class="text-xl">Blogs</ButtonLink>
           </li>
           <li>
-            <a href="/prices">
-              <Button variant="ghost" class="text-xl">
-                Prices
-              </Button>
-            </a>
+            <ButtonLink
+              href="/prices"
+              variant="ghost"
+              class="text-xl">Prices</ButtonLink>
           </li>
           <li>
-            <a href="/pokemon">
-              <Button variant="ghost" size="lg" class="text-xl">
-                Pokémon
-              </Button>
-            </a>
+            <ButtonLink
+              href="/pokemon"
+              variant="ghost"
+              size="lg"
+              class="text-xl">Pokémon</ButtonLink>
           </li>
           <li>
-            <a href="/posts">
-              <Button variant="ghost" size="lg" class="text-xl">
-                Posts
-              </Button>
-            </a>
+            <ButtonLink
+              href="/posts"
+              variant="ghost"
+              size="lg"
+              class="text-xl">Posts</ButtonLink>
           </li>
           <li>
-            <a href="/contacts">
-              <Button variant="ghost" size="lg" class="text-xl">
-                Contacts
-              </Button>
-            </a>
+            <ButtonLink
+              href="/contacts"
+              variant="ghost"
+              size="lg"
+              class="text-xl">Contacts</ButtonLink>
           </li>
           <li>
-            <a href="/me">
-              <Button variant="ghost" size="lg" class="text-xl">
-                Me
-              </Button>
-            </a>
+            <ButtonLink
+              href="/me"
+              variant="ghost"
+              size="lg"
+              class="text-xl">Me</ButtonLink>
           </li>
         </ul>
       </nav>

@@ -22,10 +22,7 @@ const headingVariants = cva("font-bold", {
   },
 });
 
-type HTMLHeadingTag = Extract<
-  HTMLTag,
-  "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
->;
+type HTMLHeadingTag = Extract<HTMLTag, "h1" | "h2" | "h3" | "h4" | "h5" | "h6">;
 
 export interface Props
   extends HTMLAttributes<HTMLHeadingTag>, VariantProps<typeof headingVariants>
@@ -42,6 +39,6 @@ const {
 } = Astro.props;
 ---
 
-<Tag class={cn(headingVariants({ size, className }), classList)} {...props}>
-  <slot />
-</Tag>
+<Tag
+  class={cn(headingVariants({ size, className }), classList)}
+  {...props}><slot /></Tag>
