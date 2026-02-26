@@ -1,0 +1,55 @@
+---
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import "@/styles/global.css";
+import { ArrowLeft } from "lucide-react";
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen max-w-[min(1000px,90%)] mx-auto grid grid-rows-[auto_1fr_auto] *:py-4">
+    <header class="">
+      <nav>
+        <ButtonLink
+          href="/"
+          variant="ghost"
+          class="absolute top-0 start-0"><ArrowLeft /></ButtonLink>
+        <ul class="flex flex-wrap gap-4 justify-center items-baseline">
+          <li>
+            <ButtonLink
+              href="/portfolio/projects"
+              variant="ghost"
+              class="text-xl">Projects</ButtonLink>
+          </li>
+          <li>
+            <ButtonLink
+              href="/portfolio"
+              variant="ghost"
+              size="icon-lg"
+              class="text-4xl">∉</ButtonLink>
+          </li>
+          <li>
+            <ButtonLink
+              href="/portfolio/blog"
+              variant="ghost"
+              class="text-xl">Blog</ButtonLink>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer></footer>
+  </body>
+</html>
