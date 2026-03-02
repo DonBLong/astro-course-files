@@ -1,0 +1,26 @@
+---
+import ProjectCard from "@/components/portfolio/projects/ProjectCard.astro";
+import ItemGroup from "@/components/ui/item/ItemGroup.astro";
+import type { ComponentProps } from "astro/types";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+interface Props extends ComponentProps<typeof ItemGroup> {
+  projects?: CollectionEntry<"projects">[];
+  limit?: number;
+}
+
+let { projects, limit, ...props } = Astro.props;
+
+projects ??= (await getCollection("projects")).toReversed().slice(0, limit);
+---
+<ItemGroup class="grid grid-cols-1 lg:grid-cols-3 gap-8" {...props}>
+  {projects.map(project => (
+    <li class="grid grid-rows-subgrid row-span-3">
+      <ProjectCard
+        project={project}
+        class="grid grid-rows-subgrid row-span-3"
+      />
+    </li>
+  ))}
+</ItemGroup>

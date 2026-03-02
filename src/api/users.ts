@@ -1,4 +1,4 @@
-export interface Contact {
+export interface User {
   id: number;
   firstname: string;
   lastname: string;
@@ -17,7 +17,8 @@ export interface Contact {
   company: { name: string; catchPhrase: string; bs: string };
 }
 
-export async function getContacts(): Promise<Contact[]> {
+export async function getUsers() {
   const res = await fetch("https://jsonplaceholder.org/users");
-  return await res.json();
+  const users: User[] = await res.json();
+  return users.map(user => ({ ...user, id: user.id.toString(), name: `${user.firstname} ${user.lastname}` }));
 }

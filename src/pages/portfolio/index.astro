@@ -1,8 +1,16 @@
 ---
-import Heading from "@/components/ui/Heading.astro";
+import Connect from "@/components/portfolio/connect/Connect.astro";
+import Features from "@/components/portfolio/home/Features.astro";
+import Hero from "@/components/portfolio/home/Hero.astro";
+import LatestPosts from "@/components/portfolio/home/LatestPosts.astro";
+import RecentProjects from "@/components/portfolio/home/RecentProjects.astro";
 import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
 ---
 
 <PortfolioLayout>
-  <Heading tag="h1" size="4xl">👋 Hi</Heading>
+  <Hero />
+  <Features />
+  <RecentProjects />
+  <Connect />
+  <LatestPosts />
 </PortfolioLayout>

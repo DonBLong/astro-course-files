@@ -1,0 +1,32 @@
+---
+import Section from "@/components/portfolio/home/Section.astro";
+import Avatar from "@/components/ui/avatar/Avatar.astro";
+import AvatarImage from "@/components/ui/avatar/AvatarImage.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import H2 from "@/components/ui/typography/H2.astro";
+import Lead from "@/components/ui/typography/Lead.astro";
+---
+
+<Section aria-label="Don't Connect" class="pt-0">
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(316px,auto))] justify-items-center p-8 gap-y-8 bg-card ring-foreground/10 ring-1 rounded-sm">
+    <Avatar class="size-24 bg-secondary">
+      <AvatarImage
+        src="https://avatars.githubusercontent.com/u/181809251?v=4"
+        alt="DonBLong Avatar"
+        width={460}
+        height={460}
+      />
+    </Avatar>
+    <div class="grid">
+      <H2 class="text-2xl">👋 Hey, I'm not</H2>
+      <Lead class="text-balance text-base mb-4">I don't like to write about
+        productivity, web development, design, or working with clients. Don't
+        get a sense of what it's like to work with me and don't understand my
+        process.</Lead>
+      <ButtonLink
+        href="/portfolio/#connect"
+        class="justify-self-start"
+        size="lg">Let's not connect</ButtonLink>
+    </div>
+  </div>
+</Section>

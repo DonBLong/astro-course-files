@@ -1,0 +1,38 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+export const prerender = false;
+
+interface Props extends HTMLAttributes<"div"> {
+  errors?: Array<{ message?: string } | undefined>;
+}
+
+const { errors, class: className, "class:list": classList, ...props } =
+  Astro.props;
+
+const hasChildren = Astro.slots.has("default");
+const hasErrors = errors && errors.length > 0;
+const uniqueErrors = hasErrors && [
+  ...new Map(errors.map((error) => [error?.message, error])).values(),
+];
+const hasMultipleUniqueErrors = uniqueErrors && uniqueErrors.length > 1;
+---
+
+<div
+  role="alert"
+  data-slot="field-error"
+  class={cn("text-destructive text-sm font-normal", className)}
+  {...props}>
+  {hasChildren
+    ? <slot />
+    : hasMultipleUniqueErrors
+    ? (
+      <ul class="ml-4 flex list-disc flex-col gap-1">
+        {uniqueErrors.map(
+          (error) => error?.message && <li>{error.message}</li>,
+        )}
+      </ul>
+    )
+    : uniqueErrors && uniqueErrors[0]?.message}
+</div>

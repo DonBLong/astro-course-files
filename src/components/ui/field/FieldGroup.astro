@@ -1,0 +1,19 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"div">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<div
+  data-slot="field-group"
+  class={cn(
+    "gap-5 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4 group/field-group @container/field-group flex w-full flex-col",
+    className,
+    classList,
+  )}
+  {...props}>
+  <slot />
+</div>

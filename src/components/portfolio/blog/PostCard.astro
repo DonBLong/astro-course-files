@@ -1,0 +1,54 @@
+---
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardAction from "@/components/ui/card/CardAction.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import CardDescription from "@/components/ui/card/CardDescription.astro";
+import CardHeader from "@/components/ui/card/CardHeader.astro";
+import CardTitle from "@/components/ui/card/CardTitle.astro";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+import type { ComponentProps } from "astro/types";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+interface Props extends ComponentProps<typeof Card> {
+  post: CollectionEntry<"blog">;
+}
+
+const {
+  post: {
+    data: {
+      image,
+      title,
+      description,
+      pubDate,
+      slug,
+      author: { collection: authorCollection, id: authorId },
+    },
+  },
+  ...props
+} = Astro.props;
+
+const author = (await getEntry(authorCollection, authorId))?.data;
+---
+<Card {...props}>
+  <Image
+    src={image}
+    alt={title}
+    class="aspect-video w-full object-cover"
+  />
+  <CardHeader class="gap-4">
+    <CardTitle>{title}</CardTitle>
+    <small class="flex gap-2">
+      <FormattedDate date={pubDate} class="text-muted-foreground" />
+      {author && <span>by {author.name}</span>}
+    </small>
+    <CardDescription>{description}</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <CardAction>
+      <ButtonLink href={`/portfolio/blog/${slug}`}>Read Post</ButtonLink>
+    </CardAction>
+  </CardContent>
+</Card>

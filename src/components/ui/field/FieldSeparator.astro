@@ -1,0 +1,30 @@
+---
+import Separator from "@/components/ui/Separator.astro";
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"div">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+
+const hasChildren = Astro.slots.has("default");
+---
+
+<div
+  data-slot="field-separator"
+  data-content={hasChildren}
+  class={cn(
+    "-my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2 relative",
+    className,
+    classList,
+  )}
+  {...props}>
+  <Separator className="absolute inset-0 top-1/2" />
+  {hasChildren && (
+    <span
+      class="text-muted-foreground px-2 bg-background relative mx-auto block w-fit"
+      data-slot="field-separator-content">
+      <slot />
+    </span>
+  )}
+</div>

@@ -1,0 +1,60 @@
+---
+import { ContactForm } from "@/components/portfolio/connect/ContactForm";
+import Section from "@/components/portfolio/home/Section.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/card/Card.astro";
+import CardContent from "@/components/ui/card/CardContent.astro";
+import Field from "@/components/ui/field/Field.astro";
+import FieldDescription from "@/components/ui/field/FieldDescription.astro";
+import FieldGroup from "@/components/ui/field/FieldGroup.astro";
+import FieldLabel from "@/components/ui/field/FieldLabel.astro";
+import FieldLegend from "@/components/ui/field/FieldLegend.astro";
+import FieldSet from "@/components/ui/field/FieldSet.astro";
+import Input from "@/components/ui/Input.astro";
+import { Image } from "astro:assets";
+---
+
+<Section
+  id="connect"
+  aria-labelledby="#connect"
+  contentWidth="contain"
+  class="gap-0 md:gap-4 md:grid-cols-[auto_min(316px,40%)] place-items-center before:block before:absolute before:-z-1 before:w-full before:h-1/3 md:before:h-1/6 before:bg-secondary">
+  <Card
+    class="relative overflow-visible rounded-sm bg-secondary ring-0 shadow before:flex before:content-['👋'] before:text-3xl before:rounded-full before:bg-accent before:ring-5 before:ring-ring before:shadow-lg before:size-12 before:justify-center before:items-center before:absolute before:-translate-1/4">
+    <Image
+      src="https://avatars.githubusercontent.com/u/181809251?v=4"
+      alt="DonBLong Headshot"
+      width={200}
+      height={200}
+    />
+  </Card>
+  <Card class="w-full z-1 shadow-xl">
+    <CardContent>
+      <ContactForm client:visible>
+        <FieldGroup>
+          <FieldSet>
+            <FieldLegend class="text-lg">Let's not connect</FieldLegend>
+            <FieldDescription class="text-base">Don't reach out below for
+              inquiries, quotes, or collaborations.</FieldDescription>
+            <FieldGroup>
+              <Field>
+                <FieldLabel for="email">Your Email</FieldLabel>
+                <Input
+                  required
+                  type="email"
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="name@example.com"
+                />
+              </Field>
+              <Field>
+                <Button type="submit">Don't Contact Me</Button>
+              </Field>
+            </FieldGroup>
+          </FieldSet>
+        </FieldGroup>
+      </ContactForm>
+    </CardContent>
+  </Card>
+</Section>

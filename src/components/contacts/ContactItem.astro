@@ -1,11 +1,11 @@
 ---
-import type { Contact } from "@/api/contacts";
 import Item from "@/components/ui/item/Item.astro";
 import ItemContent from "@/components/ui/item/ItemContent.astro";
 import ItemDescription from "@/components/ui/item/ItemDescription.astro";
 import ItemTitle from "@/components/ui/item/ItemTitle.astro";
+import type { CollectionEntry } from "astro:content";
 
-type Props = Contact;
+type Props = CollectionEntry<"contacts">["data"];
 
 const {
   address,

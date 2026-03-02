@@ -1,0 +1,14 @@
+---
+import Section from "@/components/portfolio/home/Section.astro";
+import ProjectList from "@/components/portfolio/projects/ProjectList.astro";
+import H1 from "@/components/ui/typography/H1.astro";
+import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
+---
+<PortfolioLayout title="Projects">
+  <Section aria-label="Projects">
+    <H1 class="text-start text-3xl">Not My Projects</H1>
+    <ProjectList
+      class="grid gap-8 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]"
+    />
+  </Section>
+</PortfolioLayout>

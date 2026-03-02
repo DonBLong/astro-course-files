@@ -1,0 +1,37 @@
+---
+import Section from "@/components/portfolio/home/Section.astro";
+import Item from "@/components/ui/item/Item.astro";
+import ItemContent from "@/components/ui/item/ItemContent.astro";
+import ItemDescription from "@/components/ui/item/ItemDescription.astro";
+import ItemGroup from "@/components/ui/item/ItemGroup.astro";
+import ItemHeader from "@/components/ui/item/ItemHeader.astro";
+import ItemMedia from "@/components/ui/item/ItemMedia.astro";
+import ItemTitle from "@/components/ui/item/ItemTitle.astro";
+import H2 from "@/components/ui/typography/H2.astro";
+import { getCollection } from "astro:content";
+
+const features = (await getCollection("features")).map(feature => feature.data);
+---
+
+<Section
+  aria-labelledby="#features"
+  class="bg-secondary">
+  <H2 id="features" class="text-center text-balance">I don't build fast, sleek,
+    modern websites.</H2>
+  <ItemGroup class="lg:flex-row">
+    {features.map(({ icon, title, description }) => (
+      <Item class="grid justify-items-center">
+        <ItemHeader>
+          <ItemMedia>
+            <Fragment set:html={icon} />
+          </ItemMedia>
+        </ItemHeader>
+        <ItemContent class="items-center">
+          <ItemTitle class="text-base">{title}</ItemTitle>
+          <ItemDescription
+            class="line-clamp-none text-center text-balance text-base">{description}</ItemDescription>
+        </ItemContent>
+      </Item>
+    ))}
+  </ItemGroup>
+</Section>

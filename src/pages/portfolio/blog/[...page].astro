@@ -1,0 +1,26 @@
+---
+import BlogHero from "@/components/portfolio/blog/BlogHero.astro";
+import PostList from "@/components/portfolio/blog/PostList.astro";
+import Section from "@/components/portfolio/home/Section.astro";
+import AstroPagination from "@/components/ui/pagination/AstroPagination.astro";
+import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts =
+    (await getCollection("blog", ({ data: { isDraft } }) => !isDraft)).toSorted(
+      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+    );
+  return paginate(posts, { pageSize: 3 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<PortfolioLayout>
+  <BlogHero currentPage={page.currentPage} />
+  <Section aria-label="Blog Posts">
+    <AstroPagination page={page} />
+    <PostList posts={page.data} />
+  </Section>
+</PortfolioLayout>

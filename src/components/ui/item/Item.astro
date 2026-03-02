@@ -25,7 +25,7 @@ const itemVariants = cva(
   },
 );
 
-export type Props = HTMLAttributes<"div"> & VariantProps<typeof itemVariants>;
+export type Props = HTMLAttributes<"li"> & VariantProps<typeof itemVariants>;
 
 const {
   variant,
@@ -36,9 +36,9 @@ const {
 } = Astro.props;
 ---
 
-<div
+<li
   data-slot="item"
   class={cn(itemVariants({ variant, size, className }), classList)}
   {...props}>
   <slot />
-</div>
+</li>

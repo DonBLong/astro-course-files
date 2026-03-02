@@ -1,0 +1,26 @@
+---
+import PostCard from "@/components/portfolio/blog/PostCard.astro";
+import ItemGroup from "@/components/ui/item/ItemGroup.astro";
+import type { ComponentProps } from "astro/types";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+interface Props extends ComponentProps<typeof ItemGroup> {
+  posts?: CollectionEntry<"blog">[];
+  limit?: number;
+}
+
+let { posts, limit = 0, ...props } = Astro.props;
+
+posts ??= (await getCollection("blog", ({ data: { isDraft } }) => !isDraft))
+  .toSorted((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, limit);
+---
+
+<ItemGroup class="grid grid-cols-1 lg:grid-cols-3 gap-8" {...props}>
+  {posts.map(post => (
+    <li class="grid grid-rows-subgrid row-span-3">
+      <PostCard post={post} class="grid grid-rows-subgrid row-span-3" />
+    </li>
+  ))}
+</ItemGroup>

@@ -1,0 +1,37 @@
+---
+import Section from "@/components/portfolio/home/Section.astro";
+import Avatar from "@/components/ui/avatar/Avatar.astro";
+import AvatarImage from "@/components/ui/avatar/AvatarImage.astro";
+import H1 from "@/components/ui/typography/H1.astro";
+import Lead from "@/components/ui/typography/Lead.astro";
+
+interface Props {
+  currentPage?: number;
+}
+
+const { currentPage } = Astro.props;
+---
+
+<Section aria-labelledby="#hero" class="pb-0">
+  <div class="grid justify-start md:grid-cols-[auto_min(400px,60%)] gap-8">
+    <Avatar class="size-24 bg-secondary">
+      <AvatarImage
+        src="https://avatars.githubusercontent.com/u/181809251?v=4"
+        alt="DonBLong Avatar"
+        width={460}
+        height={460}
+      />
+    </Avatar>
+    <div class="w-full grid gap-4">
+      <H1 id="hero" class="text-start text-2xl flex items-baseline gap-4">Not My
+        Blog{currentPage && (
+          <span class="font-normal text-sm uppercase text-muted-foreground">Page
+            {currentPage}</span>
+        )}</H1>
+      <Lead class="text-balance text-base">I don't like to write about
+        productivity, web development, design, or working with clients. Don't
+        get a sense of what it's like to work with me and don't understand my
+        process.</Lead>
+    </div>
+  </div>
+</Section>

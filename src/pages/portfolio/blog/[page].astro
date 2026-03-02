@@ -1,0 +1,57 @@
+---
+import AuthorBio from "@/components/portfolio/blog/AuthorBio.astro";
+import Section from "@/components/portfolio/home/Section.astro";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+import H1 from "@/components/ui/typography/H1.astro";
+import Lead from "@/components/ui/typography/Lead.astro";
+import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+export const getStaticPaths = (async () => {
+  const posts =
+    (await getCollection("blog", ({ data: { isDraft } }) => !isDraft))
+      .toSorted((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  return posts.map(post => ({
+    params: { page: post.data.slug },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+
+const {
+  image,
+  title,
+  description,
+  pubDate,
+  author: { collection: authorCollection, id: authorId },
+} = post.data;
+
+const { Content } = await render(post);
+
+const author = (await getEntry(authorCollection, authorId))?.data;
+---
+<PortfolioLayout title={title} description={description}>
+  <section aria-label="Post Metadata">
+    <header class="max-w-[min(1048px,80%)] mx-auto py-16 grid gap-4">
+      <FormattedDate date={pubDate} class="text-muted-foreground" />
+      <H1 class="text-start text-3xl font-semibold">{title}</H1>
+      {author && <small class="text-muted-foreground">by {author.name}</small>}
+      <Lead class="text-lg text-balance">{description}</Lead>
+    </header>
+    <Image
+      src={image}
+      alt={title}
+      class="aspect-video w-full max-h-[60vh] object-cover"
+    />
+  </section>
+  <Section
+    aria-label="Post Content"
+    class="[&_h2]:text-2xl [&_h2]:font-semibold">
+    <Content />
+  </Section>
+  <AuthorBio />
+</PortfolioLayout>

@@ -1,0 +1,32 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
+
+const sectionVariants = cva("py-16 grid justify-center gap-8", {
+  variants: {
+    contentWidth: {
+      full: "grid-cols-[min(1048px,80%)]",
+      contain: "grid-cols-[min(316px,80%)]",
+    },
+  },
+  defaultVariants: {
+    contentWidth: "full",
+  },
+});
+
+type Props = HTMLAttributes<"section"> & VariantProps<typeof sectionVariants>;
+
+const {
+  contentWidth,
+  class: className,
+  "class:list": classList,
+  ...props
+} = Astro.props;
+---
+
+<section
+  class={cn(sectionVariants({ contentWidth, className }), classList)}
+  {...props}>
+  <slot />
+</section>

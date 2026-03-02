@@ -1,0 +1,18 @@
+---
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"code">;
+
+const { class: className, "class:list": classList, ...props } = Astro.props;
+---
+
+<code
+  class={cn(
+    "bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
+    className,
+    classList,
+  )}
+  {...props}>
+  <slot />
+</code>

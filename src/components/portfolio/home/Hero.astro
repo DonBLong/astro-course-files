@@ -1,0 +1,31 @@
+---
+import Section from "@/components/portfolio/home/Section.astro";
+import Avatar from "@/components/ui/avatar/Avatar.astro";
+import AvatarImage from "@/components/ui/avatar/AvatarImage.astro";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import H1 from "@/components/ui/typography/H1.astro";
+import Lead from "@/components/ui/typography/Lead.astro";
+---
+
+<Section
+  aria-labelledby="#hero"
+  contentWidth="contain">
+  <Avatar class="justify-self-center size-32 bg-secondary">
+    <AvatarImage
+      src="https://avatars.githubusercontent.com/u/181809251?v=4"
+      alt="DonBLong Avatar"
+      width={460}
+      height={460}
+    />
+  </Avatar>
+  <H1 id="hero">👋 Hi, I'm not</H1>
+  <Lead class="text-center text-balance">
+    I'm not a self-taught designer or developer obsessed with quality.
+  </Lead>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-4">
+    <ButtonLink variant="outline" size="lg" download="">Don't Donwload
+      CV</ButtonLink>
+    <ButtonLink size="lg" href="/portfolio/#connect">Let's not
+      connect</ButtonLink>
+  </div>
+</Section>
