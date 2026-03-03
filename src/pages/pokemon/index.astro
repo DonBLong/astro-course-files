@@ -7,10 +7,10 @@ const pokemons = await getPokemons();
 
 <BaseLayout title="Pokémon">
   <nav>
-    <ul>
+    <ul class="flex flex-wrap gap-4">
       {pokemons.map(({ name }) => (
         <li>
-          <ButtonLink href={`/pokemon/${name}`} variant="link">
+          <ButtonLink href={`/pokemon/${name}`} variant="secondary">
             {name}
           </ButtonLink>
         </li>

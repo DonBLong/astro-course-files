@@ -17,7 +17,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 ---
 
-<PortfolioLayout>
+<PortfolioLayout title="Blog">
   <BlogHero currentPage={page.currentPage} />
   <Section aria-label="Blog Posts">
     <AstroPagination page={page} />

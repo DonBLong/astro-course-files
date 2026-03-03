@@ -2,7 +2,6 @@
 import Badge from "@/components/ui/Badge.astro";
 import Button from "@/components/ui/Button.astro";
 import Card from "@/components/ui/card/Card.astro";
-import CardAction from "@/components/ui/card/CardAction.astro";
 import CardContent from "@/components/ui/card/CardContent.astro";
 import CardDescription from "@/components/ui/card/CardDescription.astro";
 import CardFooter from "@/components/ui/card/CardFooter.astro";
@@ -57,11 +56,11 @@ const {
     <CardDescription
       class="text-foreground font-semibold w-40 mx-auto">{description}</CardDescription>
   </CardContent>
-  <CardAction class="grid px-4 my-6">
+  <div class="grid px-4 my-6">
     <Button
       variant={most_popular ? "default" : "secondary"}
       class="py-6 border-border border-2 bg-clip-border rounded-sm font-bold">{btn_text.toLocaleUpperCase()}</Button>
-  </CardAction>
+  </div>
   <CardFooter class="bg-inherit border-none">
     <ul>
       {features.map(feature => (

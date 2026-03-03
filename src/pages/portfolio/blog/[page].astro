@@ -27,6 +27,7 @@ const {
   title,
   description,
   pubDate,
+  slug,
   author: { collection: authorCollection, id: authorId },
 } = post.data;
 
@@ -37,15 +38,28 @@ const author = (await getEntry(authorCollection, authorId))?.data;
 <PortfolioLayout title={title} description={description}>
   <section aria-label="Post Metadata">
     <header class="max-w-[min(1048px,80%)] mx-auto py-16 grid gap-4">
-      <FormattedDate date={pubDate} class="text-muted-foreground" />
-      <H1 class="text-start text-3xl font-semibold">{title}</H1>
-      {author && <small class="text-muted-foreground">by {author.name}</small>}
-      <Lead class="text-lg text-balance">{description}</Lead>
+      <FormattedDate
+        date={pubDate}
+        class="text-muted-foreground"
+        transition:name={`${slug}-date`}
+      />
+      <H1
+        class="text-start text-3xl font-semibold"
+        transition:name={`${slug}-title`}>{title}</H1>
+      {author && (
+        <small
+          class="text-muted-foreground"
+          transition:name={`${slug}-author`}>by {author.name}</small>
+      )}
+      <Lead
+        class="text-lg text-balance"
+        transition:name={`${slug}-description`}>{description}</Lead>
     </header>
     <Image
       src={image}
       alt={title}
       class="aspect-video w-full max-h-[60vh] object-cover"
+      transition:name={`${slug}-image`}
     />
   </section>
   <Section

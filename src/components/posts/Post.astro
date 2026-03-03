@@ -43,7 +43,7 @@ const { Content } = await render(Astro.props);
       <Author {...author} />
     </CardAction>
   </CardHeader>
-  <CardContent class="text-lg [&_h2]:text-xl [&_h2]:font-semibold grid gap-4">
+  <CardContent class="grid gap-4">
     <Card class="relative aspect-video">
       <Image
         src={cover}
@@ -51,6 +51,8 @@ const { Content } = await render(Astro.props);
         class="relative z-20 aspect-video w-full object-cover"
       />
     </Card>
-    <Content />
+    <section aria-label="Content" class="prose lg:prose-xl dark:prose-invert">
+      <Content />
+    </section>
   </CardContent>
 </Card>

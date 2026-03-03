@@ -32,6 +32,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^25.3.0",
     "colord": "^2.9.3",
     "dprint": "^0.52.0",

@@ -1,4 +1,5 @@
 ---
+// import { Counter } from "@/components/Counter";
 import Connect from "@/components/portfolio/connect/Connect.astro";
 import Features from "@/components/portfolio/home/Features.astro";
 import Hero from "@/components/portfolio/home/Hero.astro";
@@ -7,7 +8,18 @@ import RecentProjects from "@/components/portfolio/home/RecentProjects.astro";
 import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
 ---
 
-<PortfolioLayout>
+<PortfolioLayout title="Home">
+  <!-- <video controls="" autoplay="" transition:persist="video">
+    <source
+      src="https://archive.org/download/GoldenGa1939_3/GoldenGa1939_3_512kb.mp4"
+      type="video/mp4">
+  </video>
+  <Counter
+    client:load
+    pageTitle="Home"
+    transition:persist="react-counter"
+    transition:persist-props
+  /> -->
   <Hero />
   <Features />
   <RecentProjects />

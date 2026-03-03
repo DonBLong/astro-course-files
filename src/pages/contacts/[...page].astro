@@ -2,6 +2,7 @@
 import { getUsers } from "@/api/users";
 import ContactItem from "@/components/contacts/ContactItem.astro";
 import Heading from "@/components/ui/Heading.astro";
+import ItemGroup from "@/components/ui/item/ItemGroup.astro";
 import AstroPagination from "@/components/ui/pagination/AstroPagination.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type { GetStaticPaths } from "astro";
@@ -20,11 +21,7 @@ const { page } = Astro.props;
 
   <AstroPagination page={page} class="mb-4" />
 
-  <ul class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
-    {page.data.map(contact => (
-      <li>
-        <ContactItem {...contact} />
-      </li>
-    ))}
-  </ul>
+  <ItemGroup class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+    {page.data.map(contact => <ContactItem {...contact} />)}
+  </ItemGroup>
 </BaseLayout>

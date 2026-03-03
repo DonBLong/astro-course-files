@@ -1,10 +1,22 @@
 ---
+// import { Counter } from "@/components/Counter";
 import Section from "@/components/portfolio/home/Section.astro";
 import ProjectList from "@/components/portfolio/projects/ProjectList.astro";
 import H1 from "@/components/ui/typography/H1.astro";
 import PortfolioLayout from "@/layouts/PortfolioLayout.astro";
 ---
 <PortfolioLayout title="Projects">
+  <!-- <video controls="" autoplay="" transition:persist="video">
+    <source
+      src="https://archive.org/download/GoldenGa1939_3/GoldenGa1939_3_512kb.mp4"
+      type="video/mp4">
+  </video>
+  <Counter
+    client:load
+    pageTitle="Projects"
+    transition:persist="react-counter"
+    transition:persist-props
+  /> -->
   <Section aria-label="Projects">
     <H1 class="text-start text-3xl">Not My Projects</H1>
     <ProjectList

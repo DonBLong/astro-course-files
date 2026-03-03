@@ -4,9 +4,7 @@ export interface Pokemon {
 }
 
 export async function getPokemons(): Promise<Pokemon[]> {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=100",
-  );
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100");
   const { results } = await res.json();
   return results;
 }

@@ -37,14 +37,22 @@ const author = (await getEntry(authorCollection, authorId))?.data;
     src={image}
     alt={title}
     class="aspect-video w-full object-cover"
+    transition:name={`${slug}-image`}
   />
   <CardHeader class="gap-4">
-    <CardTitle>{title}</CardTitle>
+    <CardTitle transition:name={`${slug}-title`}>{title}</CardTitle>
     <small class="flex gap-2">
-      <FormattedDate date={pubDate} class="text-muted-foreground" />
-      {author && <span>by {author.name}</span>}
+      <FormattedDate
+        date={pubDate}
+        class="text-muted-foreground"
+        transition:name={`${slug}-date`}
+      />
+      {author && (
+        <span transition:name={`${slug}-author`}>by {author.name}</span>
+      )}
     </small>
-    <CardDescription>{description}</CardDescription>
+    <CardDescription
+      transition:name={`${slug}-description`}>{description}</CardDescription>
   </CardHeader>
   <CardContent>
     <CardAction>

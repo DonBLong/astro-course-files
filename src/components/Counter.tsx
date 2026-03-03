@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Counter() {
+export function Counter({ pageTitle }: { pageTitle?: string }) {
   const [count, setCount] = useState(0);
 
   function increment() {
@@ -12,10 +12,13 @@ export function Counter() {
   }
 
   return (
-    <div className="flex w-1/3 justify-between mb-16">
-      <button className="rounded-md bg-primary text-primary-foreground text-lg size-8" onClick={decrement}>-</button>
-      <h1 className="text-3xl font-bold">Count: {count}</h1>
-      <button className="rounded-md bg-primary text-primary-foreground text-lg size-8" onClick={increment}>+</button>
-    </div>
+    <>
+      <p>{pageTitle}</p>
+      <div className="flex w-1/3 justify-between mb-16">
+        <button className="rounded-md bg-primary text-primary-foreground text-lg size-8" onClick={decrement}>-</button>
+        <h1 className="text-3xl font-bold">Count: {count}</h1>
+        <button className="rounded-md bg-primary text-primary-foreground text-lg size-8" onClick={increment}>+</button>
+      </div>
+    </>
   );
 }

@@ -15,7 +15,7 @@ interface Props extends ComponentProps<typeof Card> {
 
 const { project: { data: { image, title, href } }, ...props } = Astro.props;
 ---
-<Card {...props}>
+<Card {...props} transition:name={href}>
   <Image
     src={image}
     alt={title}
