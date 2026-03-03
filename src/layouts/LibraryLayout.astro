@@ -1,0 +1,18 @@
+---
+// components
+import Nav from "@/components/library/Nav.astro";
+import BaseHead from "@/layouts/LibraryHead.astro";
+
+// styles
+import "@/styles/library.css";
+---
+
+<html lang="en">
+  <BaseHead {...Astro.props} />
+  <body>
+    <Nav />
+    <main class="container">
+      <slot />
+    </main>
+  </body>
+</html>

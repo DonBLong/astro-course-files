@@ -1,0 +1,25 @@
+---
+import ReadingSelect from "@/components/library/ReadingSelect.astro";
+import type { TBook } from "@/types/Books";
+
+type Props = {
+  book: TBook;
+};
+
+const { book } = Astro.props;
+---
+
+<li class="book-card">
+  <ReadingSelect selectData={{ status: book.status, id: book.id }} />
+  <img
+    src={book.cover}
+    alt={book.title}
+    loading="lazy"
+    decoding="async"
+    width="225px"
+    height="320px"
+  />
+  <h3>{book.title}</h3>
+  <p>by {new Intl.ListFormat().format(book.author)}</p>
+  <a href={`/book/${book.id}`} class="btn">View Book</a>
+</li>

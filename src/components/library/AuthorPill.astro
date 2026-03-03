@@ -1,0 +1,9 @@
+---
+type Props = {
+  author: string[];
+};
+
+const { author } = Astro.props;
+---
+
+<p>by {new Intl.ListFormat().format(author)}</p>

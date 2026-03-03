@@ -1,0 +1,19 @@
+---
+import type { TBook } from "@/types/Books";
+
+type Props = {
+  selectData: Pick<TBook, "status" | "id">;
+};
+
+const { selectData } = Astro.props;
+
+const { status, id } = selectData;
+---
+
+<div class="custom-select">
+  <select class="reading-status-select" data-id={id}>
+    <option value="to_read" selected={status === "to_read"}>To Read</option>
+    <option value="reading" selected={status === "reading"}>Reading</option>
+    <option value="read" selected={status === "read"}>Read</option>
+  </select>
+</div>
