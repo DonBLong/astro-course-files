@@ -1,0 +1,21 @@
+---
+import type { Book } from "@/actions/books";
+import { BookIcon } from "@/components/library/icons/BookIcon";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  bookId: Book["id"];
+}
+
+const { bookId, class: className, "class:list": classList, ...props } =
+  Astro.props;
+---
+<a
+  data-book-link
+  title="View book"
+  href={`/library/book/${bookId}`}
+  class:list={["btn small", className, classList]}
+  {...props}>
+  <BookIcon />
+  <span>View</span>
+</a>

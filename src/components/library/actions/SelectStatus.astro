@@ -1,0 +1,73 @@
+---
+import type { Book } from "@/actions/books";
+import { LoadingIcon } from "@/components/library/icons/LoadingIcon";
+import { SaveIcon } from "@/components/library/icons/SaveIcon";
+import type { HTMLAttributes } from "astro/types";
+import { actions } from "astro:actions";
+
+interface Props extends HTMLAttributes<"form"> {
+  bookId: Book["id"];
+  bookStatus: Book["status"];
+}
+
+const { bookId, bookStatus, ...props } = Astro.props;
+---
+
+<form
+  data-set-book-status={bookId}
+  method="POST"
+  action={actions.books.setStatus}
+  {...props}>
+  <div class="custom-select">
+    <input type="hidden" name="id" value={bookId} />
+    <select name="status" class="reading-status-select">
+      <option value="to_read" selected={bookStatus === "to_read"}>
+        To Read
+      </option>
+      <option value="reading" selected={bookStatus === "reading"}>
+        Reading
+      </option>
+      <option value="read" selected={bookStatus === "read"}>Read</option>
+    </select>
+  </div>
+  <button title="Save reading status" class="btn small full-width secondary">
+    <SaveIcon />
+    <span>Save</span>
+    <LoadingIcon />
+  </button>
+  <p class="text-error" data-set-book-status-error />
+</form>
+
+<script>
+  import { actions } from "astro:actions";
+  import { navigate } from "astro:transitions/client";
+
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLFormElement>("[data-set-book-status]")
+      .forEach(form => form.addEventListener("submit", handleSubmit));
+  });
+
+  async function handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    const { currentTarget, submitter } = event;
+    if (!(currentTarget instanceof HTMLFormElement)) return;
+    if (submitter instanceof HTMLButtonElement) submitter.disabled = true;
+    const formData = new FormData(currentTarget);
+    const bookId = formData.get("id");
+    const bookStatus = formData.get("status");
+    if (bookId == null || bookStatus == null) return;
+    const { data, error } = await actions.books.setStatus(formData);
+    if (error) {
+      const errorElement = currentTarget.querySelector<HTMLElement>(
+        "data-set-book-status-error",
+      );
+      if (errorElement) errorElement.textContent = error.message;
+    } else if (
+      data.id === bookId && data.status === bookStatus
+      && location.pathname === "/library"
+    ) {
+      navigate("/library", { history: "replace" });
+    }
+    submitter?.removeAttribute("disabled");
+  }
+</script>

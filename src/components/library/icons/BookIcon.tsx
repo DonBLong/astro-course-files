@@ -1,0 +1,39 @@
+export function BookIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 145 145"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_1_2)">
+        <rect width="145" height="145" fill="transparent"></rect>
+        <path
+          d="M24.1667 48.3333C24.1667 31.2475 24.1667 22.6985 29.4773 17.394C34.7819 12.0833 43.3308 12.0833 60.4167 12.0833H84.5833C101.669 12.0833 110.218 12.0833 115.523 17.394C120.833 22.6985 120.833 31.2475 120.833 48.3333V96.6667C120.833 113.753 120.833 122.301 115.523 127.606C110.218 132.917 101.669 132.917 84.5833 132.917H60.4167C43.3308 132.917 34.7819 132.917 29.4773 127.606C24.1667 122.301 24.1667 113.753 24.1667 96.6667V48.3333Z"
+          stroke="currentColor"
+          strokeWidth="9"
+        >
+        </path>
+        <path
+          d="M120.217 96.6667H47.7171C42.0983 96.6667 39.2889 96.6667 36.981 97.2829C33.9077 98.107 31.1055 99.7257 28.8561 101.976C26.6067 104.227 24.9893 107.03 24.1667 110.103"
+          stroke="currentColor"
+          strokeWidth="9"
+        >
+        </path>
+        <path
+          d="M48.3333 42.2917H96.6666M48.3333 63.4375H78.5416"
+          stroke="currentColor"
+          strokeWidth="9"
+          strokeLinecap="round"
+        >
+        </path>
+      </g>
+      <defs>
+        <clipPath id="clip0_1_2">
+          <rect width="145" height="145" fill="transparent"></rect>
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}

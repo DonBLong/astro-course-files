@@ -1,9 +1,11 @@
 ---
-type Props = {
-  author: string[];
-};
+import type { Book } from "@/actions/books";
+
+interface Props {
+  author: Book["author"];
+}
 
 const { author } = Astro.props;
 ---
 
-<p>by {new Intl.ListFormat().format(author)}</p>
+<p>by {author ? new Intl.ListFormat().format(author) : "Uknown Author"}</p>

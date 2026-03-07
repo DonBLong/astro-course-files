@@ -1,0 +1,22 @@
+---
+import type { Book } from "@/actions/books";
+import type { RemoteImageProps } from "astro:assets";
+import { Image } from "astro:assets";
+
+type Props = Partial<RemoteImageProps> & {
+  cover: Book["cover"];
+  title: Book["title"];
+};
+
+const { cover, title, ...props } = Astro.props;
+---
+
+<Image
+  src={cover}
+  alt={title}
+  loading="lazy"
+  decoding="async"
+  width={225}
+  height={320}
+  {...props}
+/>

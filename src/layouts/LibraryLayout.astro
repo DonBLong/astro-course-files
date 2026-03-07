@@ -5,6 +5,9 @@ import BaseHead from "@/layouts/LibraryHead.astro";
 
 // styles
 import "@/styles/library.css";
+import type { ComponentProps } from "astro/types";
+
+type Props = ComponentProps<typeof BaseHead>;
 ---
 
 <html lang="en">
@@ -16,3 +19,24 @@ import "@/styles/library.css";
     </main>
   </body>
 </html>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll("form")
+      .forEach(form =>
+        form.addEventListener("submit", event => {
+          const submitButton = event.submitter;
+          if (!(submitButton instanceof HTMLButtonElement)) return;
+          submitButton.disabled = true;
+        })
+      );
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    const submitButtons = document.querySelectorAll<HTMLButtonElement>(
+      "form button[disabled]",
+    );
+    if (submitButtons == null) return;
+    submitButtons.forEach(button => button.removeAttribute("disabled"));
+  });
+</script>

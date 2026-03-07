@@ -70,8 +70,9 @@ svg {
   --color-base: #121212;
   --color-bkg: #282828;
   --color-text: #fefefe;
-  --color-accent: #a3eae5;
-  --color-error: #fa465f;
+  --color-primary: #a3eae5;
+  --color-secondary: #eae5a3;
+  --color-error: #eaa3a8;
   --color-muted: #919595;
   --shadow: 0 6px 15px hsl(0, 0%, 7%, 30%);
   color-scheme: dark light;
@@ -198,6 +199,9 @@ h1 {
 h2 {
   font-size: var(--fs-xl);
 }
+.text-error {
+  color: var(--color-error);
+}
 
 /*
 COMPONENTS
@@ -222,19 +226,19 @@ nav div {
 
 /* buttons */
 .btn {
-  --_local-bkg: var(--color-accent);
-  --_local-border: var(--color-accent);
+  --_local-bkg: var(--color-primary);
+  --_local-border: var(--color-primary);
   --_local-color: var(--color-bkg);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
   font-size: var(--fs-base);
-  padding: var(--space-2xs) var(--space-xs);
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  padding: var(--space-2xs);
+  gap: var(--space-xs);
   background-color: var(--_local-bkg);
   color: var(--_local-color);
   border-radius: var(--rounded-sm);
   border: 0.2em solid var(--_local-border);
-  width: fit-content;
   font-weight: 700;
   text-decoration: none;
   transition: all var(--slow) var(--cubic);
@@ -247,18 +251,28 @@ nav div {
   &:focus-visible {
     box-shadow: 0 0 0 4px var(--color-base), 0 0 0 8px var(--_local-border);
   }
+  &.secondary {
+    --_local-bkg: var(--color-secondary);
+    --_local-border: var(--color-secondary);
+  }
   &.warning {
     --_local-bkg: var(--color-error);
     --_local-border: var(--color-error);
     --_local-color: var(--color-base);
   }
-  &.full-width {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
   &.small {
     font-size: var(--fs-sm);
+  }
+  .loading {
+    opacity: 0;
+  }
+  &[disabled] {
+    opacity: 0.8;
+    cursor: wait;
+    .loading {
+      opacity: 1;
+      animation: spin 1s var(--cubic) infinite;
+    }
   }
 }
 
@@ -287,46 +301,55 @@ nav div {
 
 .book-card {
   display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+  text-align: center;
   gap: var(--space-sm);
   background-color: var(--color-base);
   border-radius: var(--rounded-md);
   padding: var(--space-md);
   box-shadow: var(--shadow);
-  max-width: fit-content;
   img {
-    width: 225px;
-    height: 320px;
     object-fit: contain;
+    margin-inline: auto;
   }
   h2,
   h3 {
     font-size: var(--fs-lg);
   }
+  .book-card-actions {
+    display: grid;
+    grid-row: span 3;
+    align-items: flex-end;
+    gap: var(--space-2xs);
+  }
+  .btn {
+    width: 100%;
+    grid-template-columns: auto 1fr minmax(1em, auto);
+  }
 }
 
 .book-layout {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  place-items: center;
   gap: var(--space-md);
-  align-items: center;
   img {
-    width: 315px;
-    height: 560px;
+    margin-inline: auto;
     object-fit: contain;
   }
-}
-
-/* form elements */
-form {
-  transition: all var(--slow) var(--cubic);
-  .loading {
-    display: none;
+  .title-author {
+    display: grid;
+    align-content: start;
+    gap: var(--space-2xs);
   }
-  &[disabled] {
-    opacity: 0.8;
-    cursor: wait;
-    .loading {
-      display: block;
-      animation: spin 1s var(--cubic) infinite;
+  .book-actions {
+    display: grid;
+    gap: var(--space-md);
+    .btn {
+      width: 100%;
+      grid-template-columns: auto 1fr minmax(1em, auto);
     }
   }
 }
@@ -335,7 +358,7 @@ form {
   background-color: var(--color-bkg);
   padding: var(--space-xs) var(--space-sm);
   border: none;
-  border-bottom: 3px solid var(--color-accent);
+  border-bottom: 3px solid var(--color-primary);
   border-radius: var(--rounded-md) var(--rounded-md) var(--rounded-sm)
     var(--rounded-sm);
   width: 100%;
@@ -345,6 +368,12 @@ form {
     outline: none;
     background-color: var(--color-base);
   }
+}
+
+form:has(.custom-select) {
+  display: grid;
+  align-content: center;
+  gap: var(--space-2xs);
 }
 
 .custom-select {
@@ -394,4 +423,12 @@ form {
   to {
     transform: rotate(360deg);
   }
+}
+
+/*
+  UTILITIES
+*/
+
+.hidden {
+  display: none !important;
 }

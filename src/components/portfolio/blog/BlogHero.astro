@@ -23,7 +23,9 @@ const { currentPage } = Astro.props;
       />
     </Avatar>
     <div class="w-full grid gap-4">
-      <H1 id="hero" class="text-start text-2xl flex items-baseline gap-4">Not My
+      <H1
+        id="hero"
+        class="text-start text-2xl flex items-baseline gap-4">Not My
         Blog{currentPage && (
           <span class="font-normal text-sm uppercase text-muted-foreground">Page
             {currentPage}</span>

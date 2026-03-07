@@ -1,0 +1,113 @@
+---
+import type { Book } from "@/actions/books";
+import { AddIcon } from "@/components/library/icons/AddIcon";
+import { LoadingIcon } from "@/components/library/icons/LoadingIcon";
+import { RemoveIcon } from "@/components/library/icons/RemoveIcon";
+import { cn } from "@/utils/cn";
+import type { HTMLAttributes } from "astro/types";
+import { actions } from "astro:actions";
+
+interface Props extends HTMLAttributes<"form"> {
+  book: Book;
+}
+
+const { book, ...props } = Astro.props;
+---
+
+<form
+  title={book.isSaved ? "Remove book from library" : "Add book to library"}
+  data-book-action
+  method="POST"
+  action={book.isSaved ? actions.books.removeBook : actions.books.saveBook}
+  {...props}>
+  {Object.entries(book).map(([name, value]) => (
+    <input
+      type="hidden"
+      name={name}
+      value={typeof value === "boolean" ? String(value) : value}
+    />
+  ))}
+  <button class:list={["btn small", { warning: book.isSaved, secondary: !book.isSaved }]}>
+    <AddIcon
+      data-add-icon
+      className={cn([{ hidden: book.isSaved }])}
+    />
+    <RemoveIcon
+      data-remove-icon
+      className={cn([{ hidden: !book.isSaved }])}
+    />
+    <span>{book.isSaved ? "Remove" : "Add"}</span>
+    <LoadingIcon />
+  </button>
+  <p class="text-error" data-book-action-error />
+</form>
+
+<script>
+  import { actions } from "astro:actions";
+
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll<HTMLFormElement>("[data-book-action]")
+      .forEach(form => form.addEventListener("submit", handleSubmit));
+  });
+
+  async function handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    const { currentTarget, submitter } = event;
+    if (!(currentTarget instanceof HTMLFormElement)) return;
+    if (submitter instanceof HTMLButtonElement) submitter.disabled = true;
+    const formData = new FormData(currentTarget);
+    const bookId = formData.get("id");
+    if (bookId == null) return;
+    const isSaved = formData.get("isSaved") === "true";
+    const action = isSaved
+      ? actions.books.removeBook
+      : actions.books.saveBook;
+    const { data: resultBookId, error } = await action(formData);
+    if (error) {
+      const errorElement = currentTarget.querySelector<HTMLElement>(
+        "data-book-action-error",
+      );
+      if (errorElement) errorElement.textContent = error.message;
+    } else if (resultBookId === bookId) {
+      if (submitter) {
+        const hiddenIcon = submitter.querySelector<SVGElement>(
+          isSaved
+            ? `[data-add-icon]`
+            : `[data-remove-icon]`,
+        );
+        const visibleIcon = submitter.querySelector<SVGElement>(
+          isSaved
+            ? `[data-remove-icon]`
+            : `[data-add-icon]`,
+        );
+        hiddenIcon?.classList.remove("hidden");
+        visibleIcon?.classList.add("hidden");
+        const textElement = submitter.querySelector("span");
+        if (textElement) textElement.textContent = isSaved ? "Add" : "Remove";
+        submitter.classList.replace(
+          isSaved ? "warning" : "secondary",
+          isSaved ? "secondary" : "warning",
+        );
+        const isSavedInput = currentTarget.querySelector<HTMLInputElement>(
+          "input[name=isSaved]",
+        );
+        if (isSavedInput) isSavedInput.value = String(!isSaved);
+        currentTarget.title = isSaved
+          ? "Add book to library"
+          : "Remove book from library";
+        currentTarget.action = isSaved
+          ? actions.books.saveBook
+          : actions.books.removeBook;
+        document.querySelector<HTMLAnchorElement>(
+          `a[href="/library/book/${bookId}"]`,
+        )
+          ?.classList.toggle("hidden");
+        document.querySelector<HTMLFormElement>(
+          `[data-set-book-status="${bookId}"]`,
+        )
+          ?.classList.toggle("hidden");
+      }
+    }
+    submitter?.removeAttribute("disabled");
+  }
+</script>

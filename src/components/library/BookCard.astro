@@ -1,25 +1,32 @@
 ---
-import ReadingSelect from "@/components/library/ReadingSelect.astro";
-import type { TBook } from "@/types/Books";
+import type { Book } from "@/actions/books";
+import BookActionForm from "@/components/library/actions/BookActionForm.astro";
+import SelectStatus from "@/components/library/actions/SelectStatus.astro";
+import ViewBookLink from "@/components/library/actions/ViewBookLink.astro";
+import AuthorPill from "@/components/library/AuthorPill.astro";
+import BookCover from "@/components/library/BookCover.astro";
 
-type Props = {
-  book: TBook;
-};
+interface Props {
+  book: Book;
+}
 
 const { book } = Astro.props;
 ---
 
-<li class="book-card">
-  <ReadingSelect selectData={{ status: book.status, id: book.id }} />
-  <img
-    src={book.cover}
-    alt={book.title}
-    loading="lazy"
-    decoding="async"
-    width="225px"
-    height="320px"
-  />
+<li class="book-card" transition:name={`book-card-${book.id}`}>
+  <BookCover cover={book.cover} title={book.title} />
   <h3>{book.title}</h3>
-  <p>by {new Intl.ListFormat().format(book.author)}</p>
-  <a href={`/book/${book.id}`} class="btn">View Book</a>
+  <AuthorPill author={book.author} />
+  <div class="book-card-actions">
+    <SelectStatus
+      bookId={book.id}
+      bookStatus={book.status}
+      class:list={[{ hidden: !book.isSaved }]}
+    />
+    <ViewBookLink
+      bookId={book.id}
+      class:list={[{ hidden: !book.isSaved }]}
+    />
+    <BookActionForm book={book} />
+  </div>
 </li>
