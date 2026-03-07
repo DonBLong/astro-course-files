@@ -1,7 +1,28 @@
 ---
+import BookCard from "@/components/library/BookCard.astro";
+import BookListSection from "@/components/library/BookListSection.astro";
 import BaseLayout from "@/layouts/LibraryLayout.astro";
+import { actions } from "astro:actions";
+
+export const prerender = false;
+
+const { data: books, error } = await Astro.callAction(
+  actions.books.getAllSavedBooks,
+  undefined,
+);
+
+if (error) throw error;
+
+const booksByStatus = Map.groupBy(books, book => book.status);
 ---
 
-<BaseLayout>
+<BaseLayout title="Library" description="Your Bookends library">
   <h1>Bookends Library</h1>
+  {[...booksByStatus].map(([status, books]) => (
+    <BookListSection status={status} class="book-list-section-wrapper">
+      <ul class="book-card-list">
+        {books.map(book => <BookCard book={book} />)}
+      </ul>
+    </BookListSection>
+  ))}
 </BaseLayout>

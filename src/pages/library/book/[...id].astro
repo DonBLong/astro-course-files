@@ -1,0 +1,36 @@
+---
+import BookActionForm from "@/components/library/actions/BookActionForm.astro";
+import SelectStatus from "@/components/library/actions/SelectStatus.astro";
+import AuthorPill from "@/components/library/AuthorPill.astro";
+import BookCover from "@/components/library/BookCover.astro";
+import BaseLayout from "@/layouts/LibraryLayout.astro";
+import { actions } from "astro:actions";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+if (id == null) return Astro.redirect("/library");
+
+const { data: book, error } = await Astro.callAction(
+  actions.books.getSavedBookById,
+  { id },
+);
+
+if (error) return Astro.redirect("/library");
+
+const { cover, title, author, status } = book;
+---
+<BaseLayout title={title} description="A book from your Bookends library">
+  <section class="book-layout">
+    <BookCover class="book-cover" cover={cover} title={title} />
+    <div class="title-author">
+      <h1>{title}</h1>
+      <AuthorPill author={author} />
+    </div>
+    <div class="book-actions">
+      <SelectStatus bookId={id} bookStatus={status} />
+      <BookActionForm book={book} />
+    </div>
+  </section>
+</BaseLayout>

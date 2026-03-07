@@ -1,11 +1,16 @@
+import { getActionContext } from "astro:actions";
 import { defineMiddleware } from "astro:middleware";
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const response = await next();
+  const { action } = getActionContext(context);
+  if (action?.calledFrom === "form") {
+    const referrer = context.request.headers.get("referer");
+    console.log(referrer);
 
-  if (response.status === 404 && context.url.pathname.startsWith("/portfolio/")) {
-    return context.rewrite("/portfolio/404");
+    if (referrer) {
+      await next();
+      return context.redirect(referrer);
+    }
   }
-
-  return response;
+  return next();
 });

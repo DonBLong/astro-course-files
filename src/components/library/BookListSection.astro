@@ -1,0 +1,40 @@
+---
+import type { Book } from "@/actions/books";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"section"> {
+  status: Book["status"];
+}
+
+function parseProps({ status, ...props }: Props) {
+  switch (status) {
+    case "to_read":
+      return {
+        heading: "Want to Read",
+        "aria-label": "Books I'm want to read",
+        ...props,
+      };
+    case "reading":
+      return {
+        heading: "Currently Reading",
+        "aria-label": "Books I'm currently reading",
+        ...props,
+      };
+    case "read":
+      return {
+        heading: "Books I've Read",
+        "aria-label": "Books I have read",
+        ...props,
+      };
+    default:
+      return status satisfies never;
+  }
+}
+
+const { heading, ...props } = parseProps(Astro.props);
+---
+
+<section {...props}>
+  <h2>{heading}</h2>
+  <slot />
+</section>

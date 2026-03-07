@@ -1,0 +1,33 @@
+---
+import { LoadingIcon } from "@/components/library/icons/LoadingIcon";
+import { SearchIcon } from "@/components/library/icons/SearchIcon";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"form"> {
+  search?: string | null;
+}
+
+const { search, ...props } = Astro.props;
+---
+
+<form
+  transition:persist="search-books-form"
+  class="grid-xs"
+  {...props}>
+  <label>
+    <span hidden>Add Book</span>
+    <input
+      type="search"
+      placeholder="Search for a book…"
+      name="search"
+      required
+      autocomplete="off"
+      value={search}
+    />
+  </label>
+  <button class="btn">
+    <SearchIcon />
+    <span>Search</span>
+    <LoadingIcon />
+  </button>
+</form>
